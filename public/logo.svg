@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M15 10H35V15H15V10Z" fill="currentColor"/>
+  <path d="M15 17.5H35V22.5H15V17.5Z" fill="currentColor"/>
+  <path d="M15 25H35V30H15V25Z" fill="currentColor"/>
+  <path d="M50 10H170V15H50V10Z" fill="currentColor"/>
+  <path d="M50 17.5H150V22.5H50V17.5Z" fill="currentColor"/>
+  <path d="M50 25H130V30H50V25Z" fill="currentColor"/>
+</svg>

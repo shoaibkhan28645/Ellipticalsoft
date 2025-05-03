@@ -1,0 +1,5 @@
+Please add the following font files to this directory:
+- PPNeueMontreal-Regular.woff2
+- PPNeueMontreal-Medium.woff2
+
+These are commercial fonts that need to be purchased or licensed appropriately.

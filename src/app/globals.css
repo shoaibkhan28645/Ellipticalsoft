@@ -1,26 +1,179 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground: #000000;
+  --gray-light: #e0e0e0;
+  --gray-medium: #acacac;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "PP Neue Montreal", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography styles */
+h1 {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.heading-gray {
+  color: var(--gray-medium);
+}
+
+.nav-link {
+  position: relative;
+  font-weight: 400;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -1px;
+  left: 0;
+  background-color: var(--foreground);
+  transition: width 0.2s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.cta-button {
+  transition: all 0.2s ease;
+  font-weight: 400;
+}
+
+.cta-button:hover {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+/* Floating element animations */
+.floating {
+  animation: floating 8s ease-in-out infinite;
+}
+
+.floating-delay {
+  animation: floating 8s ease-in-out 2s infinite;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px) rotate(3deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(4deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(3deg);
+  }
+}
+
+@keyframes floating-reverse {
+  0% {
+    transform: translateY(0px) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-3deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(-2deg);
+  }
+}
+
+/* Code animation wrapper */
+.code-container {
+  font-family: monospace;
+  line-height: 1.6;
+  transition: opacity 1.5s ease;
+}
+
+.fade-in {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+.code-wrapper {
+  color: white;
+}
+
+/* Add syntax highlighting classes that can be applied to the code */
+.code-wrapper .keyword,
+.keyword {
+  color: #c678dd !important; /* purple */
+}
+
+.code-wrapper .function,
+.function {
+  color: #61afef !important; /* blue */
+}
+
+.code-wrapper .string,
+.string {
+  color: #98c379 !important; /* green */
+}
+
+.code-wrapper .variable,
+.variable {
+  color: #e06c75 !important; /* red */
+}
+
+.code-wrapper .operator,
+.operator {
+  color: #56b6c2 !important; /* cyan */
+}
+
+.indent {
+  display: inline-block;
+  width: 20px;
+}
+
+/* Cursor animation */
+.cursor-blink {
+  position: relative;
+}
+
+.cursor-blink::after {
+  content: "|";
+  position: absolute;
+  color: white;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
