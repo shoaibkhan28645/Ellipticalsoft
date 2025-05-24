@@ -1,0 +1,32 @@
+@keyframes flow-down {
+  0% {
+    top: -80px;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+.animate-flow-1 {
+  animation: flow-down 15s linear infinite;
+  animation-delay: 0s;
+}
+.animate-flow-2 {
+  animation: flow-down 15s linear infinite;
+  animation-delay: 5s;
+}
+.animate-flow-3 {
+  animation: flow-down 15s linear infinite;
+  animation-delay: 10s;
+}
+.glow-lime {
+  box-shadow: 0 0 8px 2px rgba(236, 252, 203, 0.9);
+  width: 2px;
+}
