@@ -1,20 +1,6 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "PP Neue Montreal";
-  src: url("/fonts/PPNeueMontreal-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "PP Neue Montreal";
-  src: url("/fonts/PPNeueMontreal-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
+/* Outfit font is loaded via next/font/google in layout.js */
 
 :root {
   --background: #ffffff;
@@ -23,18 +9,31 @@
   --gray-medium: #acacac;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "PP Neue Montreal", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-outfit), -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 400;
   line-height: 1.2;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* Typography styles */
-h1 {
+h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
   letter-spacing: -0.02em;
 }
@@ -43,9 +42,20 @@ h1 {
   color: var(--gray-medium);
 }
 
+/* Enhanced button and link styles for mobile */
+button, 
+.nav-link,
+.cta-button {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
 .nav-link {
   position: relative;
   font-weight: 400;
+  display: inline-block;
+  padding: 0.5rem 0;
 }
 
 .nav-link::after {
@@ -66,11 +76,23 @@ h1 {
 .cta-button {
   transition: all 0.2s ease;
   font-weight: 400;
+  min-height: 44px; /* Touch-friendly minimum */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cta-button:hover {
   background-color: var(--foreground);
   color: var(--background);
+}
+
+/* Mobile-optimized focus styles */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
 }
 
 /* 3D perspective classes */
@@ -142,7 +164,7 @@ h1 {
   color: white;
 }
 
-/* Add syntax highlighting classes that can be applied to the code */
+/* Enhanced syntax highlighting for better readability */
 .code-wrapper .keyword,
 .keyword {
   color: #c678dd !important; /* purple */
@@ -192,5 +214,162 @@ h1 {
   }
   50% {
     opacity: 0;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes float-delayed {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 3s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+.animate-typing {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 2s steps(20, end) infinite;
+}
+
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  body {
+    line-height: 1.4;
+  }
+  
+  /* Improve text readability on mobile */
+  h1, h2, h3 {
+    line-height: 1.1;
+  }
+  
+  /* Better spacing for mobile */
+  .nav-link {
+    padding: 0.75rem 0;
+  }
+  
+  /* Touch-friendly interactions */
+  button,
+  .cta-button,
+  .nav-link {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Improved mobile menu animations */
+@media (max-width: 768px) {
+  .mobile-menu-enter {
+    animation: slideInRight 0.3s ease-out;
+  }
+  
+  .mobile-menu-exit {
+    animation: slideOutRight 0.3s ease-in;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Responsive images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure no horizontal overflow */
+.container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Better mobile scrolling */
+@supports (-webkit-overflow-scrolling: touch) {
+  body {
+    -webkit-overflow-scrolling: touch;
   }
 }

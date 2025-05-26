@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Artwork from "./common/Artwork";
+import RhythmicPulseGrid from "./common/RythmicPulseGrid";
 
 export default function Hero() {
   return (
@@ -26,6 +28,11 @@ export default function Hero() {
             Start Now <span className="ml-2">↗</span>
           </Link>
         </div>
+      </div>
+
+      {/* Code typing animation - positioned absolutely with enhanced styling */}
+      <div className="hidden lg:block bg-transparent absolute top-0 right-10 lg:right-20 2xl:right-0 z-10 ">
+        <RhythmicPulseGrid />
       </div>
     </section>
   );

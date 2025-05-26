@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Background from "./Background";
 
 export default function Path() {
   return (
