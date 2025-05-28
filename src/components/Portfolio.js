@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const Portfolio = () => {
   const sectionRef = useRef(null);
@@ -34,22 +35,6 @@ const Portfolio = () => {
       };
     }
   }, []);
-
-  // Text animation variants
-  const textVariants = {
-    hidden: {
-      opacity: 0,
-      x: -50,
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
 
   // Container animation
   const containerVariants = {
@@ -194,43 +179,34 @@ const Portfolio = () => {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-transparent py-16 md:py-24 overflow-hidden"
+      className="w-full bg-transparent py-16 md:py-24 h-screen overflow-hidden"
       id="portfolio-section"
     >
       <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between max-w-7xl">
         {/* Left Content */}
         <div className="w-full md:w-1/2 mb-10 md:mb-0 pr-0 md:pr-12">
           <div className="max-w-xl">
-            <motion.h3
-              className="text-gray-400 font-normal text-xl mb-3"
-              variants={textVariants}
-              initial="hidden"
-              animate={isVisible ? "visible" : "hidden"}
-              transition={{ delay: 0.2 }}
+            <h3 className="text-gray-400 font-normal text-xl mb-3">
+              Mobile App
+            </h3>
+            <h2 className="text-5xl md:text-6xl font-light mb-6">
+              <span className="text-gray-400">Storvii</span>{" "}
+              <span className="text-black font-normal">
+                A Story Telling App
+              </span>
+            </h2>
+            <p className="text-gray-700 text-lg leading-relaxed mb-8">
+              Storvii is an app that connects people through storytelling. It
+              allows users to create and join virtual story rooms, share life
+              experiences, and engage in meaningful conversations.
+            </p>
+
+            <Link
+              href="/start"
+              className="inline-flex items-center border border-black rounded-full px-8 py-3 cta-button"
             >
-              Liquidity
-            </motion.h3>
-            <motion.h2
-              className="text-5xl md:text-6xl font-light mb-6"
-              variants={textVariants}
-              initial="hidden"
-              animate={isVisible ? "visible" : "hidden"}
-              transition={{ delay: 0.4 }}
-            >
-              <span className="text-gray-400">Use Your</span>{" "}
-              <span className="text-black font-normal">Non-Liquid Assets</span>
-            </motion.h2>
-            <motion.p
-              className="text-gray-700 text-lg leading-relaxed mb-8"
-              variants={textVariants}
-              initial="hidden"
-              animate={isVisible ? "visible" : "hidden"}
-              transition={{ delay: 0.6 }}
-            >
-              Protect your assets from inflation and access immediate liquidity.
-              Connect any tokenized asset to the NAKA Card and spend it as the
-              fiat currency of your choice.
-            </motion.p>
+              Explore Projects <span className="ml-2">↗</span>
+            </Link>
           </div>
         </div>
 
@@ -266,7 +242,7 @@ const Portfolio = () => {
                 {[...Array(6)].map((_, i) => (
                   <motion.div
                     key={i}
-                    className="absolute w-2 h-2 bg-blue-400 rounded-full opacity-70"
+                    className="absolute w-2 h-2 bg-[#BEF264] rounded-full opacity-70"
                     style={{
                       left: `${30 + Math.random() * 40}%`,
                       top: `${30 + Math.random() * 40}%`,
@@ -277,14 +253,6 @@ const Portfolio = () => {
                   />
                 ))}
               </div>
-
-              {/* Dynamic Shadow */}
-              <motion.div
-                className="absolute bottom-0 left-1/2 w-[70%] h-[30px] bg-gradient-to-r from-transparent via-black to-transparent rounded-full blur-xl transform -translate-x-1/2 translate-y-8"
-                variants={shadowVariants}
-                initial="hidden"
-                animate={isVisible ? "visible" : "hidden"}
-              />
 
               {/* Phone Container - No Interactive Tilt */}
               <motion.div
@@ -314,7 +282,7 @@ const Portfolio = () => {
 
                   {/* Enhanced Screen Glow */}
                   <motion.div
-                    className="absolute inset-2 bg-gradient-to-tr from-blue-400/20 via-purple-400/30 to-pink-400/20 rounded-[25px]"
+                    className="absolute inset-2 bg-gradient-to-tr from-[#BEF264] via-[#F7C7AD] to-[#BEF264] rounded-[35px]"
                     style={{ mixBlendMode: "overlay" }}
                     variants={screenGlowVariants}
                     initial="hidden"

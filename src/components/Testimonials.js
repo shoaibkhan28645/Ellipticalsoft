@@ -12,7 +12,39 @@ const Testimonials = () => {
   const intervalRef = useRef(null);
   const activeCardRef = useRef(activeCard);
 
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
   const SLIDE_DURATION = 5000; // 5 seconds per slide
+
+  // Minimum swipe distance
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+    setIsPaused(true);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      handleNext();
+    } else if (isRightSwipe) {
+      handlePrev();
+    }
+
+    setIsPaused(false);
+  };
 
   // Keep activeCardRef in sync
   useEffect(() => {
@@ -22,68 +54,97 @@ const Testimonials = () => {
   const cards = [
     {
       id: 0,
-      title: "ELEKS overview",
+      title: "TechStart Solutions",
       bgColor: "bg-gray-600",
       content: {
-        heading: "Your trusted partner for guaranteed software delivery",
+        heading:
+          "They transformed our startup vision into a powerful SaaS platform that scaled beyond our expectations",
         description:
-          "Combining advanced technology and decades of industry insight, we design and develop bespoke full-cycle solutions tailored to deliver your unique software vision.",
-        buttonText: "Learn more",
-        awards: [
-          "OUTSOURCING 100",
-          "IAOP GLOBAL OUTSOURCING",
-          "DIGITAL INNOVATION",
+          "Working with this team was a game-changer for our startup. They didn't just build software; they became true partners in our success. Their expertise in full-stack development and cloud architecture helped us launch 3 months ahead of schedule.",
+        buttonText: "View case study",
+        details: [
+          "50% faster development",
+          "Zero downtime deployment",
+          "5x user growth in 6 months",
         ],
+        client: {
+          name: "Sarah Chen",
+          role: "CTO & Co-founder",
+          company: "TechStart Solutions",
+        },
       },
     },
     {
       id: 1,
-      title: "Data&AI",
+      title: "Global Finance Corp",
       bgColor: "bg-slate-800",
       content: {
-        heading: "Harness the full potential of your data",
+        heading:
+          "Outstanding AI implementation that revolutionized our data analytics and customer insights",
         description:
-          "Maximize your business potential by delving deeper into your data and gaining invaluable insights into your customers' needs.",
-        buttonText: "View service",
-        services: [
-          "Business intelligence",
-          "Artificial intelligence",
-          "Machine learning",
-          "Data strategy",
-          "Intelligent automation",
-          "MLOps",
+          "The machine learning models they developed have given us unprecedented insights into our customer behavior. The ROI was visible within the first quarter of implementation.",
+        buttonText: "Read full story",
+        technologies: [
+          "Machine Learning",
+          "Python & TensorFlow",
+          "Real-time Analytics",
+          "Data Visualization",
+          "API Integration",
+          "Cloud Infrastructure",
         ],
+        client: {
+          name: "Michael Rodriguez",
+          role: "VP of Data Analytics",
+          company: "Global Finance Corp",
+        },
       },
     },
     {
       id: 2,
-      title: "Fintech",
+      title: "FinNext Banking",
       bgColor: "bg-teal-700",
       content: {
-        heading: "Revolutionize financial services",
+        heading:
+          "Seamless fintech solution that modernized our entire banking infrastructure",
         description:
-          "Build innovative financial solutions that transform how people manage, invest, and transfer money.",
-        buttonText: "Explore solutions",
-        services: [
-          "Digital banking",
-          "Payment processing",
-          "Blockchain",
-          "Risk management",
-          "Regulatory compliance",
-          "Investment platforms",
+          "They delivered a comprehensive digital banking platform that not only met all regulatory requirements but also provided an exceptional user experience that our customers love.",
+        buttonText: "Explore solution",
+        achievements: [
+          "99.9% uptime achieved",
+          "PCI DSS compliant",
+          "40% increase in user engagement",
+          "Reduced processing time by 60%",
+          "5-star app store rating",
+          "Award-winning UI/UX design",
         ],
+        client: {
+          name: "Emma Thompson",
+          role: "Head of Digital Innovation",
+          company: "FinNext Banking",
+        },
       },
     },
     {
       id: 3,
-      title: "Energy",
+      title: "GreenEnergy Systems",
       bgColor: "bg-amber-800",
       content: {
-        heading: "Enable streamlined energy management",
+        heading:
+          "Innovative IoT platform that optimized our energy management across 200+ locations",
         description:
-          "Maximize productivity, increase accessibility, ensure safety, and promote sustainability throughout your energy ecosystem.",
-        buttonText: "Explore industry solutions",
-        clients: ["GR1gaz", "TecmipFMC", "WASTEER", "NRI"],
+          "Their IoT expertise helped us create a unified energy management system that monitors and optimizes energy consumption in real-time. The environmental and cost benefits have been remarkable.",
+        buttonText: "View implementation",
+        results: [
+          "35% energy cost reduction",
+          "Real-time monitoring",
+          "Predictive maintenance",
+          "Carbon footprint tracking",
+        ],
+        client: {
+          name: "David Kumar",
+          role: "Chief Technology Officer",
+          company: "GreenEnergy Systems",
+        },
       },
     },
   ];
@@ -158,125 +219,154 @@ const Testimonials = () => {
     }
   };
 
-  // Mobile view - single card
+  // Mobile view - horizontal carousel with partial cards visible
   if (isMobile) {
-    const currentCard = cards[activeCard];
-
     return (
-      <div className="min-h-screen bg-transparent flex flex-col">
-        {/* Mobile Header */}
-        <header className="bg-white shadow-sm px-4 py-3 flex items-center justify-between">
-          <div className="text-blue-600 font-bold text-xl">eleks</div>
-          <button className="bg-gray-900 text-white px-4 py-2 rounded-full text-sm flex items-center gap-2">
-            Contact us
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </header>
-
-        {/* Card Container */}
-        <div className="flex-1 p-4">
+      <div className="min-h-screen flex flex-col">
+        {/* Carousel Container */}
+        <div className="flex-1 overflow-hidden">
           <div
-            className={`relative h-[60vh] ${currentCard.bgColor} rounded-2xl overflow-hidden shadow-lg`}
-            onTouchStart={() => setIsPaused(true)}
-            onTouchEnd={() => setIsPaused(false)}
+            className="flex h-screen transition-transform duration-500 ease-out"
+            style={{
+              transform: `translateX(calc(-${activeCard * 89}vw + 6.5vw))`,
+              width: `${cards.length * 89}vw`,
+              paddingLeft: "0vw",
+            }}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
           >
-            {/* Background image for mobile */}
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  currentCard.id === 1
-                    ? 'url("data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3CradialGradient id="g1"%3E%3Cstop offset="0%25" style="stop-color:%23ff6b6b;stop-opacity:0.3"%3E%3C/stop%3E%3Cstop offset="100%25" style="stop-color:%23ff6b6b;stop-opacity:0"%3E%3C/stop%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx="200" cy="300" r="150" fill="url(%23g1)"%3E%3C/circle%3E%3C/svg%3E")'
-                    : currentCard.id === 3
-                    ? 'url("data:image/svg+xml,%3Csvg width="400" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3Cpattern id="p1" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"%3E%3Ccircle cx="25" cy="25" r="20" fill="%23666" opacity="0.3"%3E%3C/circle%3E%3C/pattern%3E%3C/defs%3E%3Crect width="400" height="600" fill="url(%23p1)"%3E%3C/rect%3E%3C/svg%3E")'
-                    : "none",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            />
+            {cards.map((card, index) => {
+              const isActive = activeCard === card.id;
 
-            {/* Card Header */}
-            <div className="relative z-10 p-4 flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full border border-white/50 flex items-center justify-center">
-                <span className="text-xs text-white">{currentCard.id + 1}</span>
-              </div>
-              <span className="text-white text-sm font-medium">
-                {currentCard.title}
-              </span>
-            </div>
+              return (
+                <div
+                  key={card.id}
+                  className={`relative ${card.bgColor} overflow-hidden flex-shrink-0 rounded-2xl shadow-2xl`}
+                  style={{
+                    width: "87vw",
+                    height: "92vh",
+                    marginTop: "4vh",
+                    marginRight: "2vw",
+                  }}
+                  onClick={() => handleCardClick(card.id)}
+                >
+                  {/* Enhanced Background */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        card.id === 1
+                          ? 'url("data:image/svg+xml,%3Csvg width="400" height="800" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3CradialGradient id="g1" cx="80%25" cy="60%25"%3E%3Cstop offset="0%25" style="stop-color:%23ff6b35;stop-opacity:0.8"%3E%3C/stop%3E%3Cstop offset="50%25" style="stop-color:%23f7931e;stop-opacity:0.4"%3E%3C/stop%3E%3Cstop offset="100%25" style="stop-color:%23ffcd3c;stop-opacity:0.1"%3E%3C/stop%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx="320" cy="480" r="200" fill="url(%23g1)"%3E%3C/circle%3E%3Cpath d="M150,300 Q200,250 250,300 T350,300 Q400,350 450,300" stroke="%23ff6b35" stroke-width="2" fill="none" opacity="0.6"%3E%3C/path%3E%3Cpath d="M100,400 Q180,350 260,400 T420,400" stroke="%23f7931e" stroke-width="1.5" fill="none" opacity="0.4"%3E%3C/path%3E%3Ccircle cx="180" cy="200" r="3" fill="%23ffcd3c" opacity="0.8"%3E%3C/circle%3E%3Ccircle cx="300" cy="150" r="2" fill="%23ff6b35" opacity="0.6"%3E%3C/circle%3E%3Ccircle cx="350" cy="250" r="4" fill="%23f7931e" opacity="0.7"%3E%3C/circle%3E%3C/svg%3E")'
+                          : card.id === 0
+                          ? 'url("data:image/svg+xml,%3Csvg width="400" height="800" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3CradialGradient id="g2" cx="70%25" cy="40%25"%3E%3Cstop offset="0%25" style="stop-color:%234a90e2;stop-opacity:0.6"%3E%3C/stop%3E%3Cstop offset="100%25" style="stop-color:%234a90e2;stop-opacity:0.1"%3E%3C/stop%3E%3C/radialGradient%3E%3CradialGradient id="g3" cx="30%25" cy="70%25"%3E%3Cstop offset="0%25" style="stop-color:%237b68ee;stop-opacity:0.4"%3E%3C/stop%3E%3Cstop offset="100%25" style="stop-color:%237b68ee;stop-opacity:0.1"%3E%3C/stop%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx="280" cy="320" r="120" fill="url(%23g2)"%3E%3C/circle%3E%3Ccircle cx="120" cy="560" r="80" fill="url(%23g3)"%3E%3C/circle%3E%3Ccircle cx="350" cy="200" r="40" fill="%234a90e2" opacity="0.3"%3E%3C/circle%3E%3Ccircle cx="150" cy="180" r="25" fill="%237b68ee" opacity="0.4"%3E%3C/circle%3E%3C/svg%3E")'
+                          : card.id === 2
+                          ? 'url("data:image/svg+xml,%3Csvg width="400" height="800" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3ClinearGradient id="g4" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%2320b2aa;stop-opacity:0.6"%3E%3C/stop%3E%3Cstop offset="100%25" style="stop-color:%2348d1cc;stop-opacity:0.2"%3E%3C/stop%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x="0" y="0" width="400" height="800" fill="url(%23g4)"%3E%3C/rect%3E%3Cpath d="M0,400 Q100,350 200,400 T400,400" stroke="%2348d1cc" stroke-width="2" fill="none" opacity="0.8"%3E%3C/path%3E%3Cpath d="M0,500 Q150,450 300,500 T400,500" stroke="%2320b2aa" stroke-width="1" fill="none" opacity="0.6"%3E%3C/path%3E%3C/svg%3E")'
+                          : 'url("data:image/svg+xml,%3Csvg width="400" height="800" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3CradialGradient id="g5" cx="60%25" cy="50%25"%3E%3Cstop offset="0%25" style="stop-color:%23ffa500;stop-opacity:0.7"%3E%3C/stop%3E%3Cstop offset="100%25" style="stop-color:%23ff8c00;stop-opacity:0.2"%3E%3C/stop%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx="240" cy="400" r="150" fill="url(%23g5)"%3E%3C/circle%3E%3Cpath d="M50,200 L100,150 L150,200 L100,250 Z" fill="%23ffa500" opacity="0.4"%3E%3C/path%3E%3Cpath d="M300,600 L350,550 L400,600 L350,650 Z" fill="%23ff8c00" opacity="0.3"%3E%3C/path%3E%3C/svg%3E")',
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      opacity: 0.8,
+                    }}
+                  />
 
-            {/* Card Content */}
-            <div className="relative z-10 h-full flex flex-col justify-center px-6 pb-16">
-              <h1 className="text-2xl font-light text-white mb-4 leading-tight">
-                {currentCard.content.heading}
-              </h1>
-              <p className="text-sm text-gray-200">
-                {currentCard.content.description}
-              </p>
-            </div>
+                  {/* Overlay for non-active cards */}
+                  {!isActive && (
+                    <div className="absolute inset-0 bg-black/20 z-5"></div>
+                  )}
 
-            {/* Progress Bar */}
-            <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/20">
-              <div
-                className="h-full bg-white"
-                style={{
-                  width: `${progress}%`,
-                  transition: "width 0.1s linear",
-                }}
-              />
-            </div>
+                  {/* Card Header */}
+                  <div className="relative z-10 pt-12 px-6 flex items-center gap-3">
+                    <div className="w-4 h-4 rounded-full border border-white flex items-center justify-center">
+                      <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                    </div>
+                    <span className="text-white text-lg font-medium">
+                      {card.title}
+                    </span>
+                  </div>
 
-            {/* Navigation buttons */}
-            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-              <button
-                onClick={handlePrev}
-                className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center bg-black/20"
-              >
-                <ChevronLeft className="w-5 h-5 text-white" />
-              </button>
+                  {/* Card Content */}
+                  <div className="relative z-10 flex flex-col justify-center px-6 pt-8 pb-32">
+                    <div className="text-6xl text-white/20 mb-4 font-serif">
+                      "
+                    </div>
+                    <h1 className="text-2xl md:text-3xl font-light text-white mb-6 leading-tight">
+                      {card.content.heading}
+                    </h1>
+                    <p className="text-base text-gray-200 mb-6 leading-relaxed max-w-lg">
+                      {card.content.description}
+                    </p>
 
-              <button
-                onClick={handleNext}
-                className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center bg-black/20"
-              >
-                <ChevronRight className="w-5 h-5 text-white" />
-              </button>
-            </div>
-          </div>
-        </div>
+                    {/* Client info */}
+                    <div className="mb-8">
+                      <div className="text-white font-medium text-lg">
+                        {card.content.client.name}
+                      </div>
+                      <div className="text-gray-300 text-sm">
+                        {card.content.client.role}
+                      </div>
+                      <div className="text-gray-400 text-sm">
+                        {card.content.client.company}
+                      </div>
+                    </div>
 
-        {/* Bottom content */}
-        <div className="px-6 py-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">
-            See how we can help you reach your goals
-          </h2>
-          <p className="text-gray-600 mb-6">
-            Answer three questions to help us match our expertise and software
-            solutions to your needs
-          </p>
+                    <button className="bg-transparent border-none text-white text-lg font-medium flex items-center gap-3 mb-8">
+                      {card.content.buttonText}
+                      <div className="w-6 h-6 rounded-full border border-white flex items-center justify-center">
+                        <ChevronRight className="w-3 h-3 text-white" />
+                      </div>
+                    </button>
+                  </div>
 
-          {/* Question section */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              <span>1.</span>
-              <span>
-                What best describes the current state of your software?
-              </span>
-            </div>
-            <button className="w-full p-3 border border-gray-300 rounded-lg flex items-center justify-between text-left">
-              <span className="text-gray-400">—</span>
-              <ChevronRight className="w-5 h-5 text-gray-400" />
-            </button>
+                  {/* Progress Bar - only show on active card */}
+                  {isActive && (
+                    <div className="absolute bottom-20 left-6 right-6 h-[1px] bg-white/30">
+                      <div
+                        className="h-full bg-white"
+                        style={{
+                          width: `${progress}%`,
+                          transition: "width 0.1s linear",
+                        }}
+                      />
+                    </div>
+                  )}
+
+                  {/* Navigation buttons - only show on active card */}
+                  {isActive && (
+                    <div className="absolute bottom-4 left-6 right-6 flex items-center justify-between">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handlePrev();
+                        }}
+                        className="w-12 h-12 rounded-full border border-white/50 flex items-center justify-center bg-white/10 backdrop-blur-sm"
+                      >
+                        <ChevronLeft className="w-5 h-5 text-white" />
+                      </button>
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleNext();
+                        }}
+                        className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg"
+                      >
+                        <ChevronRight className="w-5 h-5 text-black" />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
     );
   }
 
-  // Desktop view - expandable cards (unchanged)
+  // Desktop view - expandable cards (improved rotation)
   return (
     <div
-      className="relative w-full h-screen bg-transparent flex overflow-hidden"
+      className="relative w-full h-screen my:20 md:my-30 bg-transparent flex overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -314,24 +404,27 @@ const Testimonials = () => {
                 }`}
               />
 
-              {/* Title - Same element that rotates */}
+              {/* Improved Title with Smooth Rotation */}
               <div
-                className={`absolute transition-all duration-700 ease-in-out w-45  flex justify-end   ${
-                  isActive
-                    ? "top-12 right-12 transform rotate-0"
-                    : "top-1/8 left-1/2 transform -translate-x-1/2 -translate-y-1/8 -rotate-90 my-8 "
-                }`}
+                className="absolute"
+                style={{
+                  right: isActive ? "3rem" : "50%",
+                  top: isActive ? "3rem" : "5.5rem",
+                  transformOrigin: "center center",
+                  transform: isActive
+                    ? "translate(0, 0) rotate(0deg)"
+                    : "translate(50%, 0) rotate(-90deg)",
+                  transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+                  zIndex: 10,
+                  whiteSpace: "nowrap",
+                  width: "10rem",
+                }}
               >
-                <div className="flex items-center gap-4 ">
-                  <span
-                    className={`text-white  font-medium whitespace-nowrap transition-all duration-100 ${
-                      isActive ? "text-lg" : "text-lg"
-                    }`}
-                  >
+                <div className="flex justify-end items-center gap-4">
+                  <span className="text-white text-lg font-medium whitespace-nowrap">
                     {card.title}
                   </span>
-
-                  <div className="w-3 h-3 rounded-full border border-white flex items-center justify-center opacity-0 animate-fadeIn">
+                  <div className="w-3 h-3 rounded-full border border-white flex items-center justify-center">
                     <span className="text-xs text-white"></span>
                   </div>
                 </div>
@@ -340,9 +433,13 @@ const Testimonials = () => {
               {/* Plus icon for collapsed state */}
               {!isActive && (
                 <Plus
-                  className={`absolute bottom-8 left-1/2 -translate-x-1/2 w-8 h-8 text-white/60 transition-all duration-100 ${
+                  className={`absolute bottom-8 left-1/2 -translate-x-1/2 w-8 h-8 text-white/60 transition-all duration-300 ${
                     isHovered ? "scale-125 text-white/80" : "scale-100"
-                  } ${isActive ? "opacity-0" : "opacity-100 delay-500"}`}
+                  }`}
+                  style={{
+                    opacity: isActive ? 0 : 1,
+                    transitionDelay: isActive ? "0ms" : "500ms",
+                  }}
                 />
               )}
 
@@ -371,9 +468,20 @@ const Testimonials = () => {
                     </button>
                   </div>
 
-                  <div className="max-w-3xl mt-20">
+                  <div className="max-w-4xl mt-20">
+                    {/* Quote mark */}
+                    <div
+                      className={`text-8xl text-white/20 mb-4 font-serif transition-all duration-700 ${
+                        isActive
+                          ? "opacity-100 translate-y-0 delay-200"
+                          : "opacity-0 translate-y-8"
+                      }`}
+                    >
+                      "
+                    </div>
+
                     <h1
-                      className={`text-5xl font-light mb-8 leading-tight transition-all duration-700 ${
+                      className={`text-4xl font-light mb-8 leading-tight transition-all duration-700 ${
                         isActive
                           ? "opacity-100 translate-y-0 delay-300"
                           : "opacity-0 translate-y-8"
@@ -382,7 +490,7 @@ const Testimonials = () => {
                       {card.content.heading}
                     </h1>
                     <p
-                      className={`text-xl mb-10 text-gray-300 max-w-2xl transition-all duration-700 ${
+                      className={`text-xl mb-8 text-gray-300 max-w-3xl transition-all duration-700 ${
                         isActive
                           ? "opacity-100 translate-y-0 delay-[400ms]"
                           : "opacity-0 translate-y-8"
@@ -391,10 +499,38 @@ const Testimonials = () => {
                       {card.content.description}
                     </p>
 
+                    {/* Client Information */}
+                    <div
+                      className={`mb-10 transition-all duration-700 ${
+                        isActive
+                          ? "opacity-100 translate-y-0 delay-500"
+                          : "opacity-0 translate-y-8"
+                      }`}
+                    >
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                          <span className="text-lg font-bold">
+                            {card.content.client.name.charAt(0)}
+                          </span>
+                        </div>
+                        <div>
+                          <div className="text-xl font-medium text-white">
+                            {card.content.client.name}
+                          </div>
+                          <div className="text-gray-300">
+                            {card.content.client.role}
+                          </div>
+                          <div className="text-gray-400 text-sm">
+                            {card.content.client.company}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     <button
                       className={`bg-white text-black px-8 py-4 rounded-full font-medium flex items-center gap-2 hover:bg-gray-200 transition-all duration-700 mb-16 ${
                         isActive
-                          ? "opacity-100 translate-y-0 delay-500"
+                          ? "opacity-100 translate-y-0 delay-600"
                           : "opacity-0 translate-y-8"
                       }`}
                     >
@@ -405,7 +541,7 @@ const Testimonials = () => {
                     {/* Progress Bar */}
                     <div
                       className={`mb-8 transition-all duration-700 ${
-                        isActive ? "opacity-100 delay-[600ms]" : "opacity-0"
+                        isActive ? "opacity-100 delay-[700ms]" : "opacity-0"
                       }`}
                     >
                       <div className="w-64 h-[2px] bg-white/20 relative overflow-hidden">
@@ -419,33 +555,35 @@ const Testimonials = () => {
                       </div>
                     </div>
 
-                    {/* Awards Section */}
-                    {card.content.awards && (
+                    {/* Key Details Section */}
+                    {card.content.details && (
                       <div
                         className={`transition-all duration-700 ${
                           isActive
-                            ? "opacity-100 translate-y-0 delay-[700ms]"
+                            ? "opacity-100 translate-y-0 delay-[800ms]"
                             : "opacity-0 translate-y-8"
                         }`}
                       >
-                        <h3 className="text-2xl font-light mb-6">Awards</h3>
+                        <h3 className="text-2xl font-light mb-6">
+                          Key Results
+                        </h3>
                         <div className="flex gap-8">
-                          {card.content.awards.map((award, index) => (
+                          {card.content.details.map((detail, index) => (
                             <div
                               key={index}
-                              className={`w-20 h-20 rounded-full bg-white/10 flex items-center justify-center transition-all duration-500 ${
+                              className={`bg-white/10 px-6 py-3 rounded-lg transition-all duration-500 ${
                                 isActive
                                   ? "opacity-100 scale-100"
                                   : "opacity-0 scale-95"
                               }`}
                               style={{
                                 transitionDelay: isActive
-                                  ? `${800 + index * 100}ms`
+                                  ? `${900 + index * 100}ms`
                                   : "0ms",
                               }}
                             >
-                              <span className="text-xs text-center px-2">
-                                {award}
+                              <span className="text-lg font-medium">
+                                {detail}
                               </span>
                             </div>
                           ))}
@@ -453,20 +591,20 @@ const Testimonials = () => {
                       </div>
                     )}
 
-                    {/* Services Section */}
-                    {card.content.services && (
+                    {/* Technologies Section */}
+                    {card.content.technologies && (
                       <div
                         className={`transition-all duration-700 ${
                           isActive
-                            ? "opacity-100 translate-y-0 delay-[700ms]"
+                            ? "opacity-100 translate-y-0 delay-[800ms]"
                             : "opacity-0 translate-y-8"
                         }`}
                       >
                         <h3 className="text-2xl font-light mb-6 border-b border-gray-600 pb-2">
-                          Services
+                          Technologies Used
                         </h3>
                         <div className="grid grid-cols-3 gap-x-12 gap-y-4">
-                          {card.content.services.map((service, index) => (
+                          {card.content.technologies.map((tech, index) => (
                             <div
                               key={index}
                               className={`text-lg text-gray-300 transition-all duration-500 ${
@@ -476,46 +614,82 @@ const Testimonials = () => {
                               }`}
                               style={{
                                 transitionDelay: isActive
-                                  ? `${800 + index * 50}ms`
+                                  ? `${900 + index * 50}ms`
                                   : "0ms",
                               }}
                             >
-                              {service}
+                              {tech}
                             </div>
                           ))}
                         </div>
                       </div>
                     )}
 
-                    {/* Clients Section */}
-                    {card.content.clients && (
+                    {/* Achievements Section */}
+                    {card.content.achievements && (
                       <div
                         className={`transition-all duration-700 ${
                           isActive
-                            ? "opacity-100 translate-y-0 delay-[700ms]"
+                            ? "opacity-100 translate-y-0 delay-[800ms]"
                             : "opacity-0 translate-y-8"
                         }`}
                       >
                         <h3 className="text-2xl font-light mb-6 border-b border-gray-600 pb-2">
-                          Clients
+                          Project Achievements
+                        </h3>
+                        <div className="grid grid-cols-2 gap-x-12 gap-y-4">
+                          {card.content.achievements.map(
+                            (achievement, index) => (
+                              <div
+                                key={index}
+                                className={`text-lg text-gray-300 transition-all duration-500 ${
+                                  isActive
+                                    ? "opacity-100 translate-x-0"
+                                    : "opacity-0 translate-x-8"
+                                }`}
+                                style={{
+                                  transitionDelay: isActive
+                                    ? `${900 + index * 50}ms`
+                                    : "0ms",
+                                }}
+                              >
+                                • {achievement}
+                              </div>
+                            )
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Results Section */}
+                    {card.content.results && (
+                      <div
+                        className={`transition-all duration-700 ${
+                          isActive
+                            ? "opacity-100 translate-y-0 delay-[800ms]"
+                            : "opacity-0 translate-y-8"
+                        }`}
+                      >
+                        <h3 className="text-2xl font-light mb-6 border-b border-gray-600 pb-2">
+                          Measurable Results
                         </h3>
                         <div className="flex gap-12">
-                          {card.content.clients.map((client, index) => (
+                          {card.content.results.map((result, index) => (
                             <div
                               key={index}
-                              className={`bg-gray-800 px-6 py-3 rounded-lg transition-all duration-500 ${
+                              className={`bg-white/10 px-6 py-4 rounded-lg transition-all duration-500 ${
                                 isActive
                                   ? "opacity-100 scale-100"
                                   : "opacity-0 scale-95"
                               }`}
                               style={{
                                 transitionDelay: isActive
-                                  ? `${800 + index * 100}ms`
+                                  ? `${900 + index * 100}ms`
                                   : "0ms",
                               }}
                             >
-                              <span className="text-xl font-medium">
-                                {client}
+                              <span className="text-lg font-medium">
+                                {result}
                               </span>
                             </div>
                           ))}
@@ -529,23 +703,6 @@ const Testimonials = () => {
           );
         })}
       </div>
-
-      {/* Add animation keyframes */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        .animate-fadeIn {
-          animation: fadeIn 0.5s ease-out forwards;
-          animation-delay: 0.3s;
-        }
-      `}</style>
     </div>
   );
 };
