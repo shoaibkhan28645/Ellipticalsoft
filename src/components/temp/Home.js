@@ -1,11 +1,10 @@
-import Header from "../components/Header";
-import Hero from "../components/Hero";
-import Portfolio from "@/components/Portfolio";
-import Background from "@/components/Background";
-import Testimonials from "@/components/Testimonials";
-import Footer from "@/components/Footer";
-import ServiceExcellence from "@/components/ServiceExcellence";
-import Services from "@/components/Services";
+import Header from "./Header";
+import Hero from "./Hero";
+import Portfolio from "./Portfolio";
+import Background from "./Background";
+import Testimonials from "./Testimonials";
+import Footer from "./Footer";
+import ServiceExcellence from "./ServiceExcellence";
 
 export default function Home() {
   return (
@@ -30,9 +29,6 @@ export default function Home() {
         <div className="lg:max-w-7xl mx-auto lg:px-8">
           <Testimonials />
         </div>
-        
-        {/* Services section */}
-        <Services />
 
         {/* Footer section with dark background */}
         <div className="bg-[#191919] mt-12 md:mt-20 lg:mt-24">

@@ -4,11 +4,11 @@ import RhythmicPulseGrid from "./common/RythmicPulseGrid";
 
 export default function Hero() {
   return (
-    <section className="relative pt-20 pb-10 overflow-hidden min-h-screen">
+    <section className="relative pb-100 overflow-hidden">
       {/* Container with proper max-width constraints */}
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl">
         {/* Main hero content */}
-        <div className="relative z-20 pt-12 lg:pt-16 ">
+        <div className="relative z-20 pt-12 lg:pt-30 ">
           <div className="max-w-1xl">
             <h1 className="text-[76px] md:text-[86px] lg:text-[96px] xl:text-[106px] font-medium leading-[0.95] mb-2">
               <span className="text-[#acacac]">The Ultimate Solution </span>
@@ -33,7 +33,7 @@ export default function Hero() {
         </div>
 
         {/* Code typing animation - positioned within the container */}
-        <div className="hidden lg:block absolute top-0 right-0 xl:right-8 2xl:right-16 z-10">
+        <div className="hidden lg:block absolute top-0 right-0 z-10">
           <div className="relative">
             <RhythmicPulseGrid />
           </div>

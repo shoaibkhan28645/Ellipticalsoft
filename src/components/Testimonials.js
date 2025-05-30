@@ -1,6 +1,14 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { ChevronRight, ChevronLeft, Plus, Menu } from "lucide-react";
+import {
+  ChevronRight,
+  ChevronLeft,
+  Plus,
+  Code,
+  Database,
+  Cloud,
+  Cpu,
+} from "lucide-react";
 
 const Testimonials = () => {
   const [activeCard, setActiveCard] = useState(1);
@@ -55,7 +63,11 @@ const Testimonials = () => {
     {
       id: 0,
       title: "TechStart Solutions",
-      bgColor: "bg-gray-600",
+      bgColor: "bg-gray-900",
+      bgImage:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      icon: Code,
+      gradient: "from-blue-600/20 to-purple-600/20",
       content: {
         heading:
           "They transformed our startup vision into a powerful SaaS platform that scaled beyond our expectations",
@@ -77,7 +89,11 @@ const Testimonials = () => {
     {
       id: 1,
       title: "Global Finance Corp",
-      bgColor: "bg-slate-800",
+      bgColor: "bg-slate-900",
+      bgImage:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      icon: Database,
+      gradient: "from-emerald-600/20 to-cyan-600/20",
       content: {
         heading:
           "Outstanding AI implementation that revolutionized our data analytics and customer insights",
@@ -102,7 +118,11 @@ const Testimonials = () => {
     {
       id: 2,
       title: "FinNext Banking",
-      bgColor: "bg-teal-700",
+      bgColor: "bg-teal-900",
+      bgImage:
+        "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      icon: Cloud,
+      gradient: "from-teal-600/20 to-blue-600/20",
       content: {
         heading:
           "Seamless fintech solution that modernized our entire banking infrastructure",
@@ -127,7 +147,11 @@ const Testimonials = () => {
     {
       id: 3,
       title: "GreenEnergy Systems",
-      bgColor: "bg-amber-800",
+      bgColor: "bg-amber-900",
+      bgImage:
+        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      icon: Cpu,
+      gradient: "from-orange-600/20 to-red-600/20",
       content: {
         heading:
           "Innovative IoT platform that optimized our energy management across 200+ locations",
@@ -238,6 +262,7 @@ const Testimonials = () => {
           >
             {cards.map((card, index) => {
               const isActive = activeCard === card.id;
+              const IconComponent = card.icon;
 
               return (
                 <div
@@ -248,31 +273,29 @@ const Testimonials = () => {
                     height: "92vh",
                     marginTop: "4vh",
                     marginRight: "2vw",
+                    backgroundImage: `url(${card.bgImage})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
                   }}
                   onClick={() => handleCardClick(card.id)}
                 >
-                  {/* Enhanced Background */}
+                  {/* Tech gradient overlay */}
                   <div
-                    className="absolute inset-0"
-                    style={{
-                      backgroundImage:
-                        card.id === 1
-                          ? 'url("data:image/svg+xml,%3Csvg width="400" height="800" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3CradialGradient id="g1" cx="80%25" cy="60%25"%3E%3Cstop offset="0%25" style="stop-color:%23ff6b35;stop-opacity:0.8"%3E%3C/stop%3E%3Cstop offset="50%25" style="stop-color:%23f7931e;stop-opacity:0.4"%3E%3C/stop%3E%3Cstop offset="100%25" style="stop-color:%23ffcd3c;stop-opacity:0.1"%3E%3C/stop%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx="320" cy="480" r="200" fill="url(%23g1)"%3E%3C/circle%3E%3Cpath d="M150,300 Q200,250 250,300 T350,300 Q400,350 450,300" stroke="%23ff6b35" stroke-width="2" fill="none" opacity="0.6"%3E%3C/path%3E%3Cpath d="M100,400 Q180,350 260,400 T420,400" stroke="%23f7931e" stroke-width="1.5" fill="none" opacity="0.4"%3E%3C/path%3E%3Ccircle cx="180" cy="200" r="3" fill="%23ffcd3c" opacity="0.8"%3E%3C/circle%3E%3Ccircle cx="300" cy="150" r="2" fill="%23ff6b35" opacity="0.6"%3E%3C/circle%3E%3Ccircle cx="350" cy="250" r="4" fill="%23f7931e" opacity="0.7"%3E%3C/circle%3E%3C/svg%3E")'
-                          : card.id === 0
-                          ? 'url("data:image/svg+xml,%3Csvg width="400" height="800" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3CradialGradient id="g2" cx="70%25" cy="40%25"%3E%3Cstop offset="0%25" style="stop-color:%234a90e2;stop-opacity:0.6"%3E%3C/stop%3E%3Cstop offset="100%25" style="stop-color:%234a90e2;stop-opacity:0.1"%3E%3C/stop%3E%3C/radialGradient%3E%3CradialGradient id="g3" cx="30%25" cy="70%25"%3E%3Cstop offset="0%25" style="stop-color:%237b68ee;stop-opacity:0.4"%3E%3C/stop%3E%3Cstop offset="100%25" style="stop-color:%237b68ee;stop-opacity:0.1"%3E%3C/stop%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx="280" cy="320" r="120" fill="url(%23g2)"%3E%3C/circle%3E%3Ccircle cx="120" cy="560" r="80" fill="url(%23g3)"%3E%3C/circle%3E%3Ccircle cx="350" cy="200" r="40" fill="%234a90e2" opacity="0.3"%3E%3C/circle%3E%3Ccircle cx="150" cy="180" r="25" fill="%237b68ee" opacity="0.4"%3E%3C/circle%3E%3C/svg%3E")'
-                          : card.id === 2
-                          ? 'url("data:image/svg+xml,%3Csvg width="400" height="800" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3ClinearGradient id="g4" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%2320b2aa;stop-opacity:0.6"%3E%3C/stop%3E%3Cstop offset="100%25" style="stop-color:%2348d1cc;stop-opacity:0.2"%3E%3C/stop%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x="0" y="0" width="400" height="800" fill="url(%23g4)"%3E%3C/rect%3E%3Cpath d="M0,400 Q100,350 200,400 T400,400" stroke="%2348d1cc" stroke-width="2" fill="none" opacity="0.8"%3E%3C/path%3E%3Cpath d="M0,500 Q150,450 300,500 T400,500" stroke="%2320b2aa" stroke-width="1" fill="none" opacity="0.6"%3E%3C/path%3E%3C/svg%3E")'
-                          : 'url("data:image/svg+xml,%3Csvg width="400" height="800" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3CradialGradient id="g5" cx="60%25" cy="50%25"%3E%3Cstop offset="0%25" style="stop-color:%23ffa500;stop-opacity:0.7"%3E%3C/stop%3E%3Cstop offset="100%25" style="stop-color:%23ff8c00;stop-opacity:0.2"%3E%3C/stop%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx="240" cy="400" r="150" fill="url(%23g5)"%3E%3C/circle%3E%3Cpath d="M50,200 L100,150 L150,200 L100,250 Z" fill="%23ffa500" opacity="0.4"%3E%3C/path%3E%3Cpath d="M300,600 L350,550 L400,600 L350,650 Z" fill="%23ff8c00" opacity="0.3"%3E%3C/path%3E%3C/svg%3E")',
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      opacity: 0.8,
-                    }}
+                    className={`absolute inset-0 bg-gradient-to-br ${card.gradient}`}
                   />
+
+                  {/* Dark overlay for better text readability */}
+                  <div className="absolute inset-0 bg-black/60" />
 
                   {/* Overlay for non-active cards */}
                   {!isActive && (
-                    <div className="absolute inset-0 bg-black/20 z-5"></div>
+                    <div className="absolute inset-0 bg-black/30 z-5"></div>
                   )}
+
+                  {/* Floating tech elements */}
+                  <div className="absolute top-8 right-8 opacity-20">
+                    <IconComponent className="w-12 h-12 text-white" />
+                  </div>
 
                   {/* Card Header */}
                   <div className="relative z-10 pt-12 px-6 flex items-center gap-3">
@@ -286,7 +309,7 @@ const Testimonials = () => {
 
                   {/* Card Content */}
                   <div className="relative z-10 flex flex-col justify-center px-6 pt-8 pb-32">
-                    <div className="text-6xl text-white/20 mb-4 font-serif">
+                    <div className="text-6xl text-white/30 mb-4 font-serif">
                       "
                     </div>
                     <h1 className="text-2xl md:text-3xl font-light text-white mb-6 leading-tight">
@@ -309,7 +332,7 @@ const Testimonials = () => {
                       </div>
                     </div>
 
-                    <button className="bg-transparent border-none text-white text-lg font-medium flex items-center gap-3 mb-8">
+                    <button className="bg-transparent border-none text-white text-lg font-medium flex items-center gap-3 mb-8 hover:text-blue-300 transition-colors">
                       {card.content.buttonText}
                       <div className="w-6 h-6 rounded-full border border-white flex items-center justify-center">
                         <ChevronRight className="w-3 h-3 text-white" />
@@ -321,7 +344,7 @@ const Testimonials = () => {
                   {isActive && (
                     <div className="absolute bottom-20 left-6 right-6 h-[1px] bg-white/30">
                       <div
-                        className="h-full bg-white"
+                        className="h-full bg-gradient-to-r from-blue-400 to-purple-400"
                         style={{
                           width: `${progress}%`,
                           transition: "width 0.1s linear",
@@ -338,7 +361,7 @@ const Testimonials = () => {
                           e.stopPropagation();
                           handlePrev();
                         }}
-                        className="w-12 h-12 rounded-full border border-white/50 flex items-center justify-center bg-white/10 backdrop-blur-sm"
+                        className="w-12 h-12 rounded-full border border-white/50 flex items-center justify-center bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors"
                       >
                         <ChevronLeft className="w-5 h-5 text-white" />
                       </button>
@@ -348,7 +371,7 @@ const Testimonials = () => {
                           e.stopPropagation();
                           handleNext();
                         }}
-                        className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg"
+                        className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors"
                       >
                         <ChevronRight className="w-5 h-5 text-black" />
                       </button>
@@ -363,18 +386,29 @@ const Testimonials = () => {
     );
   }
 
-  // Desktop view - expandable cards (improved rotation)
+  // Desktop view - expandable cards with tech backgrounds
   return (
     <div
-      className="relative w-full h-screen my:20 md:my-30 bg-transparent flex overflow-hidden"
+      className="relative w-full h-150 flex overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
+      {/* Background pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div
+          className="w-full h-full"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3Ccircle cx='53' cy='53' r='1'/%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
+      </div>
+
       {/* Cards Container */}
-      <div className="flex h-full w-full gap-1 p-2">
+      <div className="flex h-full w-full gap-1 p-2 relative z-10">
         {cards.map((card, index) => {
           const isActive = activeCard === card.id;
           const isHovered = hoveredCard === card.id && !isActive;
+          const IconComponent = card.icon;
 
           return (
             <div
@@ -382,24 +416,26 @@ const Testimonials = () => {
               onClick={() => handleCardClick(card.id)}
               onMouseEnter={() => setHoveredCard(card.id)}
               onMouseLeave={() => setHoveredCard(null)}
-              className={`relative h-full cursor-pointer overflow-hidden ${card.bgColor} rounded-lg group`}
+              className={`relative h-full cursor-pointer overflow-hidden rounded-lg group`}
               style={{
                 flex: isActive ? "8" : isHovered ? "1.3" : "1",
                 transition: "flex 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
-                backgroundImage: isActive
-                  ? card.id === 1
-                    ? 'url("data:image/svg+xml,%3Csvg width="800" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3CradialGradient id="g1"%3E%3Cstop offset="0%25" style="stop-color:%23ff6b6b;stop-opacity:0.3"%3E%3C/stop%3E%3Cstop offset="100%25" style="stop-color:%23ff6b6b;stop-opacity:0"%3E%3C/stop%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx="400" cy="300" r="200" fill="url(%23g1)"%3E%3C/circle%3E%3C/svg%3E")'
-                    : card.id === 3
-                    ? 'url("data:image/svg+xml,%3Csvg width="800" height="600" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3Cpattern id="p1" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"%3E%3Ccircle cx="50" cy="50" r="40" fill="%23666" opacity="0.3"%3E%3C/circle%3E%3C/pattern%3E%3C/defs%3E%3Crect width="800" height="600" fill="url(%23p1)"%3E%3C/rect%3E%3C/svg%3E")'
-                    : "none"
-                  : "none",
+                backgroundImage: `url(${card.bgImage})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
             >
-              {/* Hover overlay */}
+              {/* Tech gradient overlay */}
               <div
-                className={`absolute inset-0 bg-white/5 transition-opacity duration-100 ${
+                className={`absolute inset-0 bg-gradient-to-br ${card.gradient}`}
+              />
+
+              {/* Dark overlay for readability */}
+              <div className="absolute inset-0 bg-black/50" />
+
+              {/* Hover overlay with subtle glow */}
+              <div
+                className={`absolute inset-0 bg-gradient-to-br from-white/10 to-transparent transition-opacity duration-300 ${
                   isHovered ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -430,11 +466,13 @@ const Testimonials = () => {
                 </div>
               </div>
 
-              {/* Plus icon for collapsed state */}
+              {/* Plus icon for collapsed state with subtle glow */}
               {!isActive && (
                 <Plus
                   className={`absolute bottom-8 left-1/2 -translate-x-1/2 w-8 h-8 text-white/60 transition-all duration-300 ${
-                    isHovered ? "scale-125 text-white/80" : "scale-100"
+                    isHovered
+                      ? "scale-125 text-white/80 drop-shadow-lg"
+                      : "scale-100"
                   }`}
                   style={{
                     opacity: isActive ? 0 : 1,
@@ -446,6 +484,8 @@ const Testimonials = () => {
               {/* Expanded State Content */}
               {isActive && (
                 <div className="flex flex-col h-full p-16 text-white relative">
+                  {/* Tech icon for active state */}
+
                   {/* Card Navigation Arrows */}
                   <div className="absolute right-12 bottom-12 flex gap-4 z-10">
                     <button
@@ -453,7 +493,7 @@ const Testimonials = () => {
                         e.stopPropagation();
                         handlePrev();
                       }}
-                      className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"
+                      className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-sm"
                     >
                       <ChevronLeft className="w-5 h-5 text-white" />
                     </button>
@@ -462,7 +502,7 @@ const Testimonials = () => {
                         e.stopPropagation();
                         handleNext();
                       }}
-                      className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"
+                      className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-sm"
                     >
                       <ChevronRight className="w-5 h-5 text-white" />
                     </button>
@@ -471,7 +511,7 @@ const Testimonials = () => {
                   <div className="max-w-4xl mt-20">
                     {/* Quote mark */}
                     <div
-                      className={`text-8xl text-white/20 mb-4 font-serif transition-all duration-700 ${
+                      className={`text-8xl text-white/30 mb-4 font-serif transition-all duration-700 ${
                         isActive
                           ? "opacity-100 translate-y-0 delay-200"
                           : "opacity-0 translate-y-8"
@@ -508,7 +548,7 @@ const Testimonials = () => {
                       }`}
                     >
                       <div className="flex items-center gap-4 mb-6">
-                        <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                        <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
                           <span className="text-lg font-bold">
                             {card.content.client.name.charAt(0)}
                           </span>
@@ -528,7 +568,7 @@ const Testimonials = () => {
                     </div>
 
                     <button
-                      className={`bg-white text-black px-8 py-4 rounded-full font-medium flex items-center gap-2 hover:bg-gray-200 transition-all duration-700 mb-16 ${
+                      className={`bg-white text-black px-8 py-4 rounded-full font-medium flex items-center gap-2 hover:bg-gray-200 transition-all duration-700 mb-16 hover:shadow-lg ${
                         isActive
                           ? "opacity-100 translate-y-0 delay-600"
                           : "opacity-0 translate-y-8"
@@ -538,15 +578,15 @@ const Testimonials = () => {
                       <ChevronRight className="w-5 h-5" />
                     </button>
 
-                    {/* Progress Bar */}
+                    {/* Progress Bar with gradient */}
                     <div
                       className={`mb-8 transition-all duration-700 ${
                         isActive ? "opacity-100 delay-[700ms]" : "opacity-0"
                       }`}
                     >
-                      <div className="w-64 h-[2px] bg-white/20 relative overflow-hidden">
+                      <div className="w-64 h-[2px] bg-white/20 relative overflow-hidden rounded-full">
                         <div
-                          className="absolute left-0 top-0 h-full bg-white"
+                          className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
                           style={{
                             width: `${progress}%`,
                             transition: "width 0.1s linear",
@@ -555,7 +595,7 @@ const Testimonials = () => {
                       </div>
                     </div>
 
-                    {/* Key Details Section */}
+                    {/* Dynamic content based on card type */}
                     {card.content.details && (
                       <div
                         className={`transition-all duration-700 ${
@@ -571,7 +611,7 @@ const Testimonials = () => {
                           {card.content.details.map((detail, index) => (
                             <div
                               key={index}
-                              className={`bg-white/10 px-6 py-3 rounded-lg transition-all duration-500 ${
+                              className={`bg-white/10 backdrop-blur-sm px-6 py-3 rounded-lg transition-all duration-500 hover:bg-white/20 ${
                                 isActive
                                   ? "opacity-100 scale-100"
                                   : "opacity-0 scale-95"
@@ -591,7 +631,6 @@ const Testimonials = () => {
                       </div>
                     )}
 
-                    {/* Technologies Section */}
                     {card.content.technologies && (
                       <div
                         className={`transition-all duration-700 ${
@@ -607,7 +646,7 @@ const Testimonials = () => {
                           {card.content.technologies.map((tech, index) => (
                             <div
                               key={index}
-                              className={`text-lg text-gray-300 transition-all duration-500 ${
+                              className={`text-lg text-gray-300 transition-all duration-500 hover:text-white ${
                                 isActive
                                   ? "opacity-100 translate-x-0"
                                   : "opacity-0 translate-x-8"
@@ -625,7 +664,6 @@ const Testimonials = () => {
                       </div>
                     )}
 
-                    {/* Achievements Section */}
                     {card.content.achievements && (
                       <div
                         className={`transition-all duration-700 ${
@@ -642,7 +680,7 @@ const Testimonials = () => {
                             (achievement, index) => (
                               <div
                                 key={index}
-                                className={`text-lg text-gray-300 transition-all duration-500 ${
+                                className={`text-lg text-gray-300 transition-all duration-500 hover:text-white ${
                                   isActive
                                     ? "opacity-100 translate-x-0"
                                     : "opacity-0 translate-x-8"
@@ -661,7 +699,6 @@ const Testimonials = () => {
                       </div>
                     )}
 
-                    {/* Results Section */}
                     {card.content.results && (
                       <div
                         className={`transition-all duration-700 ${
@@ -677,7 +714,7 @@ const Testimonials = () => {
                           {card.content.results.map((result, index) => (
                             <div
                               key={index}
-                              className={`bg-white/10 px-6 py-4 rounded-lg transition-all duration-500 ${
+                              className={`bg-white/10 backdrop-blur-sm px-6 py-4 rounded-lg transition-all duration-500 hover:bg-white/20 ${
                                 isActive
                                   ? "opacity-100 scale-100"
                                   : "opacity-0 scale-95"

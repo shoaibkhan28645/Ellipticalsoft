@@ -179,23 +179,23 @@ const Portfolio = () => {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-transparent py-16 md:py-24 h-screen overflow-hidden"
+      className="w-full bg-transparent mb-70 py-16 md:py-24 overflow-hidden"
       id="portfolio-section"
     >
-      <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between max-w-7xl">
+      <div className="container flex flex-col md:flex-row items-center justify-between max-w-7xl">
         {/* Left Content */}
         <div className="w-full md:w-1/2 mb-10 md:mb-0 pr-0 md:pr-12">
           <div className="max-w-xl">
-            <h3 className="text-gray-400 font-normal text-xl mb-3">
+            <h3 className="text-[#191919] font-outfit font-medium tracking-wider mb-4 text-xs uppercase">
               Mobile App
             </h3>
-            <h2 className="text-5xl md:text-6xl font-light mb-6">
-              <span className="text-gray-400">Storvii</span>{" "}
+            <h2 className="text-4xl md:text-5xl font-light mb-6">
+              <span className="text-gray-400">Storvii</span>
               <span className="text-black font-normal">
                 A Story Telling App
               </span>
             </h2>
-            <p className="text-gray-700 text-lg leading-relaxed mb-8">
+            <p className="text-lg md:text-xl text-[#6b6b6b] leading-relaxed mb-8">
               Storvii is an app that connects people through storytelling. It
               allows users to create and join virtual story rooms, share life
               experiences, and engage in meaningful conversations.
@@ -215,7 +215,7 @@ const Portfolio = () => {
           <div className="relative w-[400px] h-[600px]">
             {/* Grey Square Container - Smaller */}
             <motion.div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] bg-gradient-to-br from-gray-200 to-gray-300 rounded-3xl shadow-2xl"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] bg-gradient-to-br from-gray-200 to-gray-300 rounded-3xl shadow-2xl"
               initial="hidden"
               animate={isVisible ? "visible" : "hidden"}
               variants={greyContainerVariants}
@@ -232,7 +232,7 @@ const Portfolio = () => {
 
             {/* Animated Mobile Image Container - Smaller Size */}
             <motion.div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[240px] h-[450px] z-10"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[240px] h-[500px] z-10"
               initial="hidden"
               animate={isVisible ? "visible" : "hidden"}
               variants={containerVariants}
@@ -263,7 +263,7 @@ const Portfolio = () => {
               >
                 {/* Floating Animation Wrapper */}
                 <motion.div
-                  className="relative w-full h-full"
+                  className="relative w-full h-120"
                   variants={floatingVariants}
                   animate="animate"
                 >
@@ -281,13 +281,13 @@ const Portfolio = () => {
                   />
 
                   {/* Enhanced Screen Glow */}
-                  <motion.div
+                  {/* <motion.div
                     className="absolute inset-2 bg-gradient-to-tr from-[#BEF264] via-[#F7C7AD] to-[#BEF264] rounded-[35px]"
                     style={{ mixBlendMode: "overlay" }}
                     variants={screenGlowVariants}
                     initial="hidden"
                     animate={isVisible ? "visible" : "hidden"}
-                  />
+                  /> */}
 
                   {/* Screen Reflection */}
                   <motion.div

@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { Linkedin, Youtube, Code, Database, Cloud, Shield } from "lucide-react";
+import VectorFieldLines from "./common/VectorFieldLines";
 
 export default function Footer() {
   return (
     <footer className="bg-transparent text-white">
-      <div className="container mx-auto px-4 sm:px-6 pb-8 md:pb-12">
+      <div className="container">
         {/* Call to Action Card */}
-        <div className="bg-[#E3E5E8] rounded-2xl p-6 md:p-10 lg:p-15 my-8 md:my-12 lg:my-45 relative overflow-hidden">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-            <div className="max-w-2xl z-10 relative">
+        <div className="bg-[#E3E5E8] flex items-center justify-between rounded-2xl p-6 md:p-10 lg:px-10 lg:py-0 my-8 md:my-12 lg:my-45 relative overflow-hidden">
+          <div className="relative z-10 flex flex-col items-center text-left">
+            <div className="max-w-2xl">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
                 Ready to get started?
               </h2>
@@ -20,71 +21,9 @@ export default function Footer() {
                 <span className="ml-2">↗</span>
               </button>
             </div>
-
-            {/* Tech Stack Display - now responsive */}
-            <div className="w-full lg:w-80">
-              <div className="space-y-6">
-                {/* Tech Stack Icons */}
-                <div>
-                  <h3 className="text-sm font-medium text-gray-500 mb-3">
-                    Our Tech Stack
-                  </h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
-                    <div className="flex flex-col items-center p-2 md:p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                      <Code className="w-5 h-5 md:w-6 md:h-6 text-blue-600 mb-1 md:mb-2" />
-                      <span className="text-xs text-gray-600 font-medium">
-                        Frontend
-                      </span>
-                    </div>
-                    <div className="flex flex-col items-center p-2 md:p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                      <Database className="w-5 h-5 md:w-6 md:h-6 text-green-600 mb-1 md:mb-2" />
-                      <span className="text-xs text-gray-600 font-medium">
-                        Database
-                      </span>
-                    </div>
-                    <div className="flex flex-col items-center p-2 md:p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                      <Cloud className="w-5 h-5 md:w-6 md:h-6 text-purple-600 mb-1 md:mb-2" />
-                      <span className="text-xs text-gray-600 font-medium">
-                        Cloud
-                      </span>
-                    </div>
-                    <div className="flex flex-col items-center p-2 md:p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                      <Shield className="w-5 h-5 md:w-6 md:h-6 text-red-600 mb-1 md:mb-2" />
-                      <span className="text-xs text-gray-600 font-medium">
-                        Security
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Simple Stats */}
-                <div>
-                  <h3 className="text-sm font-medium text-gray-500 mb-3">
-                    Why Choose Us
-                  </h3>
-                  <div className="grid grid-cols-3 gap-3 md:gap-4">
-                    <div className="text-center">
-                      <div className="text-xl md:text-2xl font-bold text-gray-900">
-                        99.9%
-                      </div>
-                      <div className="text-xs text-gray-600">Uptime</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-xl md:text-2xl font-bold text-gray-900">
-                        24/7
-                      </div>
-                      <div className="text-xs text-gray-600">Support</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-xl md:text-2xl font-bold text-gray-900">
-                        500+
-                      </div>
-                      <div className="text-xs text-gray-600">Projects</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          </div>
+          <div className="flex items-center justify-center">
+            <VectorFieldLines />
           </div>
         </div>
 
