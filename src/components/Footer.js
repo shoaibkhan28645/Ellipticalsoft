@@ -4,11 +4,12 @@ import VectorFieldLines from "./common/VectorFieldLines";
 
 export default function Footer() {
   return (
-    <footer className="bg-transparent text-white">
+    <footer className="bg-transparent text-white pb-15">
       <div className="container">
         {/* Call to Action Card */}
-        <div className="bg-[#E3E5E8] flex items-center justify-between rounded-2xl p-6 md:p-10 lg:px-10 lg:py-0 my-8 md:my-12 lg:my-45 relative overflow-hidden">
-          <div className="relative z-10 flex flex-col items-center text-left">
+        <div className="bg-[#E3E5E8] flex flex-col lg:flex-row lg:items-center lg:justify-between rounded-2xl p-6 md:p-10 lg:px-10 lg:py-0 my-8 md:my-12 lg:my-45 relative overflow-hidden">
+          {/* Text Content */}
+          <div className="relative z-10 flex flex-col items-start text-left w-full lg:w-auto">
             <div className="max-w-2xl">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
                 Ready to get started?
@@ -22,7 +23,9 @@ export default function Footer() {
               </button>
             </div>
           </div>
-          <div className="flex items-center justify-center">
+
+          {/* Vector Field Lines */}
+          <div className="absolute inset-0 flex items-center justify-end lg:relative lg:inset-auto z-0 lg:z-auto">
             <VectorFieldLines />
           </div>
         </div>
@@ -33,12 +36,12 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1 space-y-4 md:space-y-6">
             <div>
               <h2 className="text-base md:text-lg font-medium mb-3 md:mb-4">
-                NAKA is the first blockchain-based EMV compatible Payment
-                Ecosystem, including Network and Card.
+                DevLabyrint is the leading software IT innovator, delivering
+                cutting-edge solutions and services
               </h2>
               <p className="text-gray-400 text-sm leading-relaxed">
-                NAKA fosters financial inclusion and autonomy by providing vital
-                financial services in a user-friendly way.
+                DevLabyrint empowers businesses and individuals by providing
+                seamless, scalable technology in a user-friendly way.
               </p>
             </div>
             {/* Social Media */}
@@ -59,37 +62,7 @@ export default function Footer() {
           </div>
 
           {/* Products */}
-          <div className="space-y-4">
-            <h3 className="text-base md:text-lg font-medium text-white">
-              Products
-            </h3>
-            <ul className="space-y-2 md:space-y-3">
-              <li>
-                <Link
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors text-sm"
-                >
-                  Payment Card
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors text-sm"
-                >
-                  Payment Network
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors text-sm"
-                >
-                  Payment Acceptance
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <div className="space-y-4"></div>
 
           {/* Company */}
           <div className="space-y-4">
@@ -110,7 +83,7 @@ export default function Footer() {
                   href="#"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
-                  NAKA Blog
+                  Services
                 </Link>
               </li>
               <li>
@@ -118,23 +91,7 @@ export default function Footer() {
                   href="#"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors text-sm"
-                >
-                  Company Information
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors text-sm"
-                >
-                  Brand Guidelines
+                  Portfolio
                 </Link>
               </li>
             </ul>
@@ -151,7 +108,7 @@ export default function Footer() {
                   href="#"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
-                  Get Started with NAKA
+                  Blogs
                 </Link>
               </li>
               <li>
@@ -159,7 +116,7 @@ export default function Footer() {
                   href="#"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
-                  Help and FAQ's
+                  FAQ's
                 </Link>
               </li>
             </ul>
@@ -179,52 +136,13 @@ export default function Footer() {
                   Terms & Conditions
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors text-sm"
-                >
-                  Cookie Policy
-                </Link>
-              </li>
+
               <li>
                 <Link
                   href="#"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors text-sm"
-                >
-                  Cookie Preferences
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors text-sm"
-                >
-                  NAKA Card Legal Documents
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors text-sm"
-                >
-                  QA & IT Security Mgmt. Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors text-sm"
-                >
-                  Rules on Establishing Internal Reporting Channels
                 </Link>
               </li>
             </ul>
@@ -239,8 +157,7 @@ export default function Footer() {
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                   <div className="text-center p-3 md:p-4">
                     <h4 className="text-white font-medium text-xs md:text-sm mb-2">
-                      Crypto Payments in El Salvador: How Local Businesses
-                      are...
+                      Blog 1
                     </h4>
                   </div>
                 </div>
@@ -252,7 +169,7 @@ export default function Footer() {
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                   <div className="text-center p-3 md:p-4">
                     <h4 className="text-white font-medium text-xs md:text-sm mb-2">
-                      Bridging the Liquidity Gap: How On-Chain Payments Keep...
+                      Blog 2
                     </h4>
                   </div>
                 </div>
@@ -264,7 +181,7 @@ export default function Footer() {
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                   <div className="text-center p-3 md:p-4">
                     <h4 className="text-white font-medium text-xs md:text-sm mb-2">
-                      Visa & Mastercard Won't Win, Unless You Break...
+                      Blog 3
                     </h4>
                   </div>
                 </div>
@@ -277,7 +194,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-start pt-6 md:pt-8 space-y-4 md:space-y-0">
           <div className="max-w-2xl">
             <p className="text-gray-400 text-xs leading-relaxed mb-2">
-              © 2024-2025 NAKA GLOBAL LTD. All rights reserved.
+              © 2024-2025 DevLabyrinth. All rights reserved.
             </p>
             <p className="text-gray-500 text-xs leading-relaxed">
               All trademarks, logos, and brand names featured on this website
@@ -289,7 +206,7 @@ export default function Footer() {
 
           <div className="flex-shrink-0">
             <div className="text-xl md:text-2xl font-bold tracking-wider">
-              NAKA
+              DevLabyrinth
             </div>
           </div>
         </div>

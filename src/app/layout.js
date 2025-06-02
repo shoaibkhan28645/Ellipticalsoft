@@ -1,5 +1,7 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -9,10 +11,11 @@ const outfit = Outfit({
 });
 
 export const metadata = {
-  title: "NAKA - The Ultimate Solution for Financial Inclusion",
-  description: "NAKA is revolutionising financial accessibility by enabling businesses to offer their customers vital financial services.",
+  title: "DevLabyrinth - Innovative IT Solutions & Software Development",
+  description:
+    "DevLabyrinth transforms businesses with cutting-edge software development, cloud solutions, AI integration, and comprehensive IT services.",
   viewport: {
-    width: 'device-width',
+    width: "device-width",
     initialScale: 1,
     maximumScale: 1,
   },
@@ -21,8 +24,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`min-h-screen ${outfit.variable}`}>
-        {children}
+      <body className={`min-h-screen  ${outfit.variable}`}>
+        <Header />
+        <main className="min-h-screen">{children}</main>
+        <div className="bg-[#191919] mt-12 md:mt-20 lg:mt-24 z-40">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <Footer />
+          </div>
+        </div>
       </body>
     </html>
   );

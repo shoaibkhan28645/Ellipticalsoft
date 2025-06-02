@@ -4,21 +4,21 @@ import RhythmicPulseGrid from "./common/RythmicPulseGrid";
 
 export default function Hero() {
   return (
-    <section className="relative pb-100 overflow-hidden">
+    <section className="relative mb-80 overflow-hidden">
       {/* Container with proper max-width constraints */}
       <div className="relative mx-auto max-w-7xl">
         {/* Main hero content */}
         <div className="relative z-20 pt-12 lg:pt-30 ">
           <div className="max-w-1xl">
-            <h1 className="text-[76px] md:text-[86px] lg:text-[96px] xl:text-[106px] font-medium leading-[0.95] mb-2">
-              <span className="text-[#acacac]">The Ultimate Solution </span>
+            <h1 className="text-[56px] sm:text-[66px] md:text-[86px] lg:text-[96px] xl:text-[106px] font-medium leading-[0.95] mb-2">
+              <span className="text-[#BDBBBB]">The Ultimate Solution </span>
               <span className="text-black">for</span>
             </h1>
-            <h1 className="text-[76px] md:text-[86px] lg:text-[96px] xl:text-[106px] font-medium leading-[0.95] mb-12">
+            <h1 className="text-[56px] sm:text-[66px] md:text-[86px] lg:text-[96px] xl:text-[106px] font-medium leading-[0.95] mb-8 md:mb-12">
               Programming
             </h1>
             <div className="max-w-2xl">
-              <p className="text-xl mb-12 font-normal text-gray-700">
+              <p className="text-lg md:text-xl mb-8 md:mb-12 font-normal text-gray-700">
                 EllipticalSoft is revolutionising software company by providing
                 all type solutions to your problems with ease.
               </p>

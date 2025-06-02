@@ -1,123 +1,297 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const menuVariants = {
+    closed: {
+      x: "100%",
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 40,
+      },
+    },
+    open: {
+      x: 0,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 40,
+      },
+    },
+  };
+
+  const overlayVariants = {
+    closed: {
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+      },
+    },
+    open: {
+      opacity: 1,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+
+  const linkVariants = {
+    closed: {
+      opacity: 0,
+      x: 50,
+    },
+    open: {
+      opacity: 1,
+      x: 0,
+    },
+  };
+
+  const navLinks = [
+    { href: "/services", label: "Services" },
+    { href: "/portfolio", label: "Portfolio" },
+    { href: "/about", label: "About" },
+  ];
+
   return (
-    <header className="py-4 md:py-8 relative z-50">
-      <div className="flex justify-between items-center">
-        <div className="flex items-center">
-          <Link href="/" className="text-xl md:text-2xl font-bold">
-            Elliptical Soft
-          </Link>
-        </div>
+    <>
+      <header 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16 md:h-20">
+            {/* Logo */}
+            <Link 
+              href="/" 
+              className="text-xl md:text-2xl font-bold text-[#191919] z-50 relative"
+            >
+              DevLabyrinth
+            </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center">
-          <Link href="/payment-network" className="nav-link mr-6 lg:mr-8">
-            IT Solutions
-          </Link>
-          <Link href="/card" className="nav-link mr-6 lg:mr-8">
-            Software
-          </Link>
-          <Link href="/discover" className="nav-link mr-6 lg:mr-8">
-            Development
-          </Link>
-        </nav>
-
-        {/* Desktop CTA Section */}
-        <div className="hidden md:flex items-center">
-          <Link
-            href="/join"
-            className="hidden lg:block mr-4 xl:mr-8 hover:underline text-sm"
-          >
-            Join the 2025 Acquirers Program
-          </Link>
-          <Link
-            href="/news"
-            className="border border-black rounded-full px-3 md:px-5 py-2 text-sm flex items-center gap-1 hover:bg-black hover:text-white transition-colors"
-          >
-            News <span>↗</span>
-          </Link>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={toggleMobileMenu}
-          className="md:hidden p-2 border border-black rounded-full hover:bg-black hover:text-white transition-colors"
-          aria-label="Toggle mobile menu"
-        >
-          {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-      </div>
-
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden">
-          <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-lg z-50">
-            <div className="flex justify-between items-center p-6 border-b">
-              <span className="text-lg font-bold">Menu</span>
-              <button
-                onClick={toggleMobileMenu}
-                className="p-2 border border-black rounded-full hover:bg-black hover:text-white transition-colors"
-                aria-label="Close mobile menu"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            
-            <nav className="p-6">
-              <div className="space-y-6">
-                <Link 
-                  href="/payment-network" 
-                  className="block text-lg font-medium hover:text-gray-600 transition-colors"
-                  onClick={toggleMobileMenu}
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="relative text-[#191919] font-medium transition-colors hover:text-[#6b6b6b] group"
                 >
-                  IT Solutions
+                  {link.label}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#191919] transition-all duration-300 group-hover:w-full" />
                 </Link>
-                <Link 
-                  href="/card" 
-                  className="block text-lg font-medium hover:text-gray-600 transition-colors"
-                  onClick={toggleMobileMenu}
-                >
-                  Software
-                </Link>
-                <Link 
-                  href="/discover" 
-                  className="block text-lg font-medium hover:text-gray-600 transition-colors"
-                  onClick={toggleMobileMenu}
-                >
-                  Development
-                </Link>
-                
-                <div className="pt-6 border-t space-y-4">
-                  <Link
-                    href="/join"
-                    className="block text-sm text-gray-600 hover:text-black transition-colors"
-                    onClick={toggleMobileMenu}
-                  >
-                    Join the 2025 Acquirers Program
-                  </Link>
-                  <Link
-                    href="/news"
-                    className="inline-flex items-center border border-black rounded-full px-4 py-2 text-sm gap-1 hover:bg-black hover:text-white transition-colors"
-                    onClick={toggleMobileMenu}
-                  >
-                    News <span>↗</span>
-                  </Link>
-                </div>
-              </div>
+              ))}
             </nav>
+
+            {/* Desktop CTA */}
+            <div className="hidden md:flex items-center space-x-6">
+              <Link
+                href="/careers"
+                className="text-sm text-[#6b6b6b] hover:text-[#191919] transition-colors"
+              >
+                Join Our Team
+              </Link>
+              <Link
+                href="/contact"
+                className="bg-[#191919] text-white rounded-full px-6 py-2.5 text-sm font-medium hover:bg-[#2a2a2a] transition-all duration-300 hover:scale-105"
+              >
+                Get Started
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <motion.button
+              onClick={toggleMobileMenu}
+              className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center"
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="relative w-6 h-6">
+                <motion.span
+                  className="absolute left-0 w-6 h-0.5 bg-[#191919] origin-center"
+                  style={{ top: 0 }}
+                  animate={{
+                    rotate: isMobileMenuOpen ? 45 : 0,
+                    y: isMobileMenuOpen ? 11 : 0,
+                  }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                />
+                <motion.span
+                  className="absolute left-0 w-6 h-0.5 bg-[#191919]"
+                  style={{ top: "50%", translateY: "-50%" }}
+                  animate={{
+                    opacity: isMobileMenuOpen ? 0 : 1,
+                    scaleX: isMobileMenuOpen ? 0 : 1,
+                  }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                />
+                <motion.span
+                  className="absolute left-0 w-6 h-0.5 bg-[#191919] origin-center"
+                  style={{ bottom: 0 }}
+                  animate={{
+                    rotate: isMobileMenuOpen ? -45 : 0,
+                    y: isMobileMenuOpen ? -11 : 0,
+                  }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                />
+              </div>
+            </motion.button>
           </div>
         </div>
-      )}
-    </header>
+      </header>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+              variants={overlayVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              onClick={toggleMobileMenu}
+            />
+
+            {/* Menu Panel */}
+            <motion.div
+              className="fixed top-0 right-0 bottom-0 w-full sm:max-w-sm bg-white shadow-2xl z-50 md:hidden overflow-y-auto mobile-menu-scroll"
+              variants={menuVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+            >
+              <div className="flex flex-col h-full">
+                {/* Menu Header */}
+                <div className="flex items-center justify-between p-6 border-b border-gray-100">
+                  <Link href="/" onClick={toggleMobileMenu} className="text-xl font-bold text-[#191919]">
+                    DevLabyrinth
+                  </Link>
+                  <motion.button
+                    onClick={toggleMobileMenu}
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <X className="w-5 h-5 text-[#191919]" />
+                  </motion.button>
+                </div>
+
+                {/* Navigation Links */}
+                <nav className="flex-1 px-6 py-8">
+                  <div className="space-y-1">
+                    {navLinks.map((link, index) => (
+                      <motion.div
+                        key={link.href}
+                        variants={linkVariants}
+                        initial="closed"
+                        animate="open"
+                        exit="closed"
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <Link
+                          href={link.href}
+                          onClick={toggleMobileMenu}
+                          className="flex items-center justify-between py-4 text-lg font-medium text-[#191919] hover:text-[#6b6b6b] transition-colors group"
+                        >
+                          <span>{link.label}</span>
+                          <ArrowRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                </nav>
+
+                {/* CTA Section */}
+                <div className="p-6 border-t border-gray-100 space-y-4">
+                  <motion.div
+                    variants={linkVariants}
+                    initial="closed"
+                    animate="open"
+                    exit="closed"
+                    transition={{ delay: 0.3 }}
+                  >
+                    <Link
+                      href="/careers"
+                      onClick={toggleMobileMenu}
+                      className="block text-center text-sm text-[#6b6b6b] hover:text-[#191919] transition-colors py-2"
+                    >
+                      Join Our Team
+                    </Link>
+                  </motion.div>
+                  
+                  <motion.div
+                    variants={linkVariants}
+                    initial="closed"
+                    animate="open"
+                    exit="closed"
+                    transition={{ delay: 0.4 }}
+                  >
+                    <Link
+                      href="/contact"
+                      onClick={toggleMobileMenu}
+                      className="block w-full bg-[#191919] text-white text-center rounded-full px-6 py-3 font-medium hover:bg-[#2a2a2a] transition-colors"
+                    >
+                      Get Started
+                    </Link>
+                  </motion.div>
+                </div>
+
+                {/* Footer Info */}
+                <div className="px-6 pb-6">
+                  <motion.div
+                    className="text-xs text-[#6b6b6b] space-y-2"
+                    variants={linkVariants}
+                    initial="closed"
+                    animate="open"
+                    exit="closed"
+                    transition={{ delay: 0.5 }}
+                  >
+                    <p>© 2024 DevLabyrinth. All rights reserved.</p>
+                    <p>Transforming ideas into digital reality.</p>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Spacer for fixed header */}
+      <div className="h-16 md:h-20" />
+    </>
   );
 }

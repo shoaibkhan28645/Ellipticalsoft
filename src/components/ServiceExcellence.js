@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function ServiceExcellence() {
   return (
-    <div className="w-full bg-transparent py-20 mb-50 lg:py-30 relative">
+    <div className="w-full bg-transparent py-20 mb-80  relative">
       <div className="container items-center relative z-10">
         <h1 className="text-4xl lg:text-5xl font-light mb-12 lg:mb-16">
           <span className="text-[#BDBBBB]">Excellence</span>{" "}

@@ -127,7 +127,7 @@ const VectorFieldLines = () => {
         if (this.points.length < 2) return;
 
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(51, 51, 51, ${this.opacity})`;
+        ctx.strokeStyle = `rgba(166, 195, 62, ${this.opacity})`;
         ctx.lineWidth = this.width * lineWidth;
 
         ctx.moveTo(this.points[0].x, this.points[0].y);

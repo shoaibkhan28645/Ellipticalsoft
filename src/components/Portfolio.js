@@ -190,7 +190,7 @@ const Portfolio = () => {
               Mobile App
             </h3>
             <h2 className="text-4xl md:text-5xl font-light mb-6">
-              <span className="text-gray-400">Storvii</span>
+              <span className="text-[#BDBBBB]">Storvii</span>
               <span className="text-black font-normal">
                 A Story Telling App
               </span>
@@ -211,7 +211,7 @@ const Portfolio = () => {
         </div>
 
         {/* Right Content - Smaller Mobile */}
-        <div className="w-full md:w-1/2 flex justify-center md:justify-end">
+        <div className="w-full md:w-1/2 flex justify-center md:justify-end sc no-scrollbar">
           <div className="relative w-[400px] h-[600px]">
             {/* Grey Square Container - Smaller */}
             <motion.div
