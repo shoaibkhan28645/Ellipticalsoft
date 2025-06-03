@@ -122,7 +122,7 @@ export default function Services() {
               FEATURED INSIGHTS
             </h3>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-outfit font-bold mb-6 leading-tight">
-              <span className="text-[#BDBBBB]">We Don't Just Offer</span>{" "}
+              <span className="text-[#BDBBBB]">We Don&apos;t Just Offer</span>{" "}
               <span className="text-[#191919] block mt-2">
                 Services We Deliver Success
               </span>

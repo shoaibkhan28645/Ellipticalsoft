@@ -83,12 +83,13 @@ export default function Header() {
   const navLinks = [
     { href: "/services", label: "Services" },
     { href: "/portfolio", label: "Portfolio" },
+    { href: "/blog", label: "Blogs" },
     { href: "/about", label: "About" },
   ];
 
   return (
     <>
-      <header 
+      <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
         }`}
@@ -96,8 +97,8 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
             {/* Logo */}
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="text-xl md:text-2xl font-bold text-[#191919] z-50 relative"
             >
               DevLabyrinth
@@ -120,7 +121,7 @@ export default function Header() {
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center space-x-6">
               <Link
-                href="/careers"
+                href="/about"
                 className="text-sm text-[#6b6b6b] hover:text-[#191919] transition-colors"
               >
                 Join Our Team
@@ -198,7 +199,11 @@ export default function Header() {
               <div className="flex flex-col h-full">
                 {/* Menu Header */}
                 <div className="flex items-center justify-between p-6 border-b border-gray-100">
-                  <Link href="/" onClick={toggleMobileMenu} className="text-xl font-bold text-[#191919]">
+                  <Link
+                    href="/"
+                    onClick={toggleMobileMenu}
+                    className="text-xl font-bold text-[#191919]"
+                  >
                     DevLabyrinth
                   </Link>
                   <motion.button
@@ -245,14 +250,14 @@ export default function Header() {
                     transition={{ delay: 0.3 }}
                   >
                     <Link
-                      href="/careers"
+                      href="/about"
                       onClick={toggleMobileMenu}
                       className="block text-center text-sm text-[#6b6b6b] hover:text-[#191919] transition-colors py-2"
                     >
                       Join Our Team
                     </Link>
                   </motion.div>
-                  
+
                   <motion.div
                     variants={linkVariants}
                     initial="closed"

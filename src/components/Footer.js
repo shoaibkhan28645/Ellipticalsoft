@@ -17,10 +17,13 @@ export default function Footer() {
               <p className="text-gray-700 text-base md:text-lg mb-6">
                 Contact us to grow your business.
               </p>
-              <button className="inline-flex items-center border border-black rounded-full px-6 md:px-8 py-2 md:py-3 cta-button text-black hover:bg-black hover:text-white transition-colors">
+              <Link
+                href="/contact"
+                className="inline-flex items-center border border-black rounded-full px-6 md:px-8 py-2 md:py-3 cta-button text-black hover:bg-black hover:text-white transition-colors"
+              >
                 Contact Sales
                 <span className="ml-2">↗</span>
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -72,7 +75,7 @@ export default function Footer() {
             <ul className="space-y-2 md:space-y-3">
               <li>
                 <Link
-                  href="#"
+                  href="/about"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   About Us
@@ -80,7 +83,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/services"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   Services
@@ -88,7 +91,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/portfolio"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   Portfolio
@@ -105,7 +108,7 @@ export default function Footer() {
             <ul className="space-y-2 md:space-y-3">
               <li>
                 <Link
-                  href="#"
+                  href="/blog"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   Blogs
@@ -116,7 +119,7 @@ export default function Footer() {
                   href="#"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
-                  FAQ's
+                  FAQ&apos;s
                 </Link>
               </li>
             </ul>
@@ -149,44 +152,53 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Featured Articles */}
+        {/* Featured Blogs */}
         <div className="w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12 lg:w-2/3 lg:ml-auto">
-            <div className="bg-gray-800 rounded-lg overflow-hidden">
+            <Link href="/blog/future-of-web-development-2025" className="bg-gray-800 rounded-lg overflow-hidden hover:transform hover:scale-105 transition-all duration-300">
               <div className="h-32 md:h-48 bg-gradient-to-br from-blue-500 to-purple-600 relative">
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                   <div className="text-center p-3 md:p-4">
-                    <h4 className="text-white font-medium text-xs md:text-sm mb-2">
+                    <h4 className="text-white font-medium text-xs md:text-sm mb-1">
                       Blog 1
                     </h4>
+                    <p className="text-white/80 text-xs hidden md:block">
+                      Future of Web Development
+                    </p>
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
 
-            <div className="bg-gray-800 rounded-lg overflow-hidden">
+            <Link href="/blog/cloud-migration-complete-guide-2025" className="bg-gray-800 rounded-lg overflow-hidden hover:transform hover:scale-105 transition-all duration-300">
               <div className="h-32 md:h-48 bg-gradient-to-br from-green-500 to-teal-600 relative">
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                   <div className="text-center p-3 md:p-4">
-                    <h4 className="text-white font-medium text-xs md:text-sm mb-2">
+                    <h4 className="text-white font-medium text-xs md:text-sm mb-1">
                       Blog 2
                     </h4>
+                    <p className="text-white/80 text-xs hidden md:block">
+                      Cloud Migration Guide
+                    </p>
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
 
-            <div className="bg-gray-800 rounded-lg overflow-hidden md:col-span-2 lg:col-span-1">
+            <Link href="/blog/ai-automation-transforming-business-operations" className="bg-gray-800 rounded-lg overflow-hidden md:col-span-2 lg:col-span-1 hover:transform hover:scale-105 transition-all duration-300">
               <div className="h-32 md:h-48 bg-gradient-to-br from-orange-500 to-red-600 relative">
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                   <div className="text-center p-3 md:p-4">
-                    <h4 className="text-white font-medium text-xs md:text-sm mb-2">
+                    <h4 className="text-white font-medium text-xs md:text-sm mb-1">
                       Blog 3
                     </h4>
+                    <p className="text-white/80 text-xs hidden md:block">
+                      AI & Automation
+                    </p>
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
 

@@ -223,7 +223,7 @@ const Testimonials = () => {
             What Our Clients Say
           </h2>
           <p className="text-base text-gray-600 max-w-2xl mx-auto px-2">
-            Hear from companies who've transformed their business with our
+            Hear from companies who&apos;ve transformed their business with our
             solutions
           </p>
         </div>
@@ -341,7 +341,7 @@ const Testimonials = () => {
               <span className="text-[#191919] mt-2">Stories That Inspire</span>
             </h2>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Discover how we've helped businesses transform their digital
+              Discover how we&apos;ve helped businesses transform their digital
               presence and achieve remarkable results. From startups to
               enterprises, our solutions drive growth and innovation.
             </p>
@@ -489,7 +489,7 @@ const Testimonials = () => {
                                 : "opacity-0 translate-y-8"
                             }`}
                           >
-                            "
+                            &quot;
                           </div>
 
                           <h1

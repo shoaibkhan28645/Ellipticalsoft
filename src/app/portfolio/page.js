@@ -2,14 +2,14 @@
 
 import Background, { FogOverlay } from "@/components/Background";
 import { motion } from "framer-motion";
-import { 
-  ExternalLink, 
-  Github, 
+import {
+  ExternalLink,
+  Github,
   ArrowRight,
   Filter,
   Grid,
   List,
-  Sparkles
+  Sparkles,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -20,97 +20,111 @@ export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [viewMode, setViewMode] = useState("grid");
   const [hoveredProject, setHoveredProject] = useState(null);
-  
+
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
-  const categories = ["All", "Web Development", "Mobile Apps", "AI Solutions", "Cloud Projects", "E-Commerce"];
+  const categories = [
+    "All",
+    "Web Development",
+    "Mobile Apps",
+    "AI Solutions",
+    "Cloud Projects",
+    "E-Commerce",
+  ];
 
   const projects = [
     {
       id: 1,
       title: "FinTech Revolution",
       category: "Web Development",
-      description: "A comprehensive financial management platform built with Next.js and Node.js, featuring real-time analytics and secure payment processing.",
+      description:
+        "A comprehensive financial management platform built with Next.js and Node.js, featuring real-time analytics and secure payment processing.",
       image: "/images/project1.jpg",
       technologies: ["React", "Node.js", "PostgreSQL", "AWS"],
       liveUrl: "#",
       githubUrl: "#",
       color: "from-blue-500 to-purple-500",
       year: "2024",
-      client: "Global Finance Corp"
+      client: "Global Finance Corp",
     },
     {
       id: 2,
       title: "HealthConnect Mobile",
       category: "Mobile Apps",
-      description: "Cross-platform healthcare application connecting patients with doctors, featuring video consultations and appointment scheduling.",
+      description:
+        "Cross-platform healthcare application connecting patients with doctors, featuring video consultations and appointment scheduling.",
       image: "/images/project2.jpg",
       technologies: ["React Native", "Firebase", "Node.js", "WebRTC"],
       liveUrl: "#",
       githubUrl: "#",
       color: "from-green-500 to-teal-500",
       year: "2024",
-      client: "MediCare Solutions"
+      client: "MediCare Solutions",
     },
     {
       id: 3,
       title: "AI Content Generator",
       category: "AI Solutions",
-      description: "Advanced AI-powered content generation platform using GPT-4 and custom ML models for creating high-quality marketing content.",
+      description:
+        "Advanced AI-powered content generation platform using GPT-4 and custom ML models for creating high-quality marketing content.",
       image: "/images/project3.jpg",
       technologies: ["Python", "TensorFlow", "React", "FastAPI"],
       liveUrl: "#",
       githubUrl: "#",
       color: "from-purple-500 to-pink-500",
       year: "2023",
-      client: "ContentPro Inc"
+      client: "ContentPro Inc",
     },
     {
       id: 4,
       title: "CloudScale Infrastructure",
       category: "Cloud Projects",
-      description: "Enterprise-grade cloud infrastructure solution with auto-scaling, monitoring, and disaster recovery capabilities.",
+      description:
+        "Enterprise-grade cloud infrastructure solution with auto-scaling, monitoring, and disaster recovery capabilities.",
       image: "/images/project4.jpg",
       technologies: ["AWS", "Kubernetes", "Docker", "Terraform"],
       liveUrl: "#",
       githubUrl: "#",
       color: "from-orange-500 to-red-500",
       year: "2023",
-      client: "TechScale Systems"
+      client: "TechScale Systems",
     },
     {
       id: 5,
       title: "E-Market Pro",
       category: "E-Commerce",
-      description: "Full-featured e-commerce platform with inventory management, multi-vendor support, and AI-powered recommendations.",
+      description:
+        "Full-featured e-commerce platform with inventory management, multi-vendor support, and AI-powered recommendations.",
       image: "/images/project5.jpg",
       technologies: ["Next.js", "Stripe", "MongoDB", "Redis"],
       liveUrl: "#",
       githubUrl: "#",
       color: "from-yellow-500 to-orange-500",
       year: "2024",
-      client: "Retail Dynamics"
+      client: "Retail Dynamics",
     },
     {
       id: 6,
       title: "Smart City Dashboard",
       category: "Web Development",
-      description: "Real-time city management dashboard with IoT integration, traffic monitoring, and resource optimization.",
+      description:
+        "Real-time city management dashboard with IoT integration, traffic monitoring, and resource optimization.",
       image: "/images/project6.jpg",
       technologies: ["Vue.js", "D3.js", "Node.js", "PostgreSQL"],
       liveUrl: "#",
       githubUrl: "#",
       color: "from-indigo-500 to-blue-500",
       year: "2023",
-      client: "Metro City Council"
-    }
+      client: "Metro City Council",
+    },
   ];
 
-  const filteredProjects = selectedCategory === "All" 
-    ? projects 
-    : projects.filter(project => project.category === selectedCategory);
+  const filteredProjects =
+    selectedCategory === "All"
+      ? projects
+      : projects.filter((project) => project.category === selectedCategory);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -118,9 +132,9 @@ export default function PortfolioPage() {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
-    }
+        delayChildren: 0.3,
+      },
+    },
   };
 
   const itemVariants = {
@@ -130,16 +144,16 @@ export default function PortfolioPage() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
       <div className="relative flex-1">
         <FogOverlay />
-        
+
         <div className="absolute inset-0 z-0">
           <div className="max-w-7xl mx-auto flex justify-end h-full relative">
             <Background className="absolute top-0 right-0 xl:right-8 2xl:right-16 h-full w-1/4 sm:w-1/3 lg:w-1/3 max-w-md" />
@@ -159,13 +173,14 @@ export default function PortfolioPage() {
                 <Sparkles className="w-4 h-4 mr-2" />
                 Our Portfolio
               </div>
-              
+
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                 <span className="text-[#BDBBBB]">Showcasing</span>{" "}
                 <span className="text-[#191919]">Our Work</span>
               </h1>
               <p className="text-xl text-[#6b6b6b] mb-12 leading-relaxed max-w-3xl mx-auto">
-                Explore our diverse portfolio of successful projects that have transformed businesses and delivered exceptional results.
+                Explore our diverse portfolio of successful projects that have
+                transformed businesses and delivered exceptional results.
               </p>
             </motion.div>
           </div>
@@ -190,12 +205,14 @@ export default function PortfolioPage() {
                   </button>
                 ))}
               </div>
-              
+
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setViewMode("grid")}
                   className={`p-2 rounded-lg transition-colors ${
-                    viewMode === "grid" ? "bg-[#191919] text-white" : "bg-gray-100 text-[#6b6b6b]"
+                    viewMode === "grid"
+                      ? "bg-[#191919] text-white"
+                      : "bg-gray-100 text-[#6b6b6b]"
                   }`}
                 >
                   <Grid className="w-5 h-5" />
@@ -203,7 +220,9 @@ export default function PortfolioPage() {
                 <button
                   onClick={() => setViewMode("list")}
                   className={`p-2 rounded-lg transition-colors ${
-                    viewMode === "list" ? "bg-[#191919] text-white" : "bg-gray-100 text-[#6b6b6b]"
+                    viewMode === "list"
+                      ? "bg-[#191919] text-white"
+                      : "bg-gray-100 text-[#6b6b6b]"
                   }`}
                 >
                   <List className="w-5 h-5" />
@@ -217,7 +236,11 @@ export default function PortfolioPage() {
         <section className="py-20 px-4 relative z-40">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <motion.div
-              className={viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" : "space-y-8"}
+              className={
+                viewMode === "grid"
+                  ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                  : "space-y-8"
+              }
               variants={containerVariants}
               initial="hidden"
               animate={isVisible ? "visible" : "hidden"}
@@ -233,20 +256,28 @@ export default function PortfolioPage() {
                   onMouseLeave={() => setHoveredProject(null)}
                 >
                   {/* Project Image */}
-                  <div className={`relative overflow-hidden ${
-                    viewMode === "list" ? "md:w-1/3" : "h-64"
-                  }`}>
-                    <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-75`} />
+                  <div
+                    className={`relative overflow-hidden ${
+                      viewMode === "list" ? "md:w-1/3" : "h-64"
+                    }`}
+                  >
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-75`}
+                    />
                     {/* Placeholder for actual project image */}
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-white text-2xl font-bold">{project.title}</span>
+                      <span className="text-white text-2xl font-bold">
+                        {project.title}
+                      </span>
                     </div>
-                    
+
                     {/* Hover Overlay */}
                     <motion.div
                       className="absolute inset-0 bg-[#191919] flex items-center justify-center gap-4"
                       initial={{ opacity: 0 }}
-                      animate={{ opacity: hoveredProject === project.id ? 0.9 : 0 }}
+                      animate={{
+                        opacity: hoveredProject === project.id ? 0.9 : 0,
+                      }}
                       transition={{ duration: 0.3 }}
                     >
                       <Link
@@ -265,24 +296,28 @@ export default function PortfolioPage() {
                   </div>
 
                   {/* Project Details */}
-                  <div className={`p-6 ${viewMode === "list" ? "md:w-2/3" : ""}`}>
+                  <div
+                    className={`p-6 ${viewMode === "list" ? "md:w-2/3" : ""}`}
+                  >
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-sm text-[#6b6b6b]">{project.category}</span>
-                      <span className="text-sm text-[#6b6b6b]">{project.year}</span>
+                      <span className="text-sm text-[#6b6b6b]">
+                        {project.category}
+                      </span>
+                      <span className="text-sm text-[#6b6b6b]">
+                        {project.year}
+                      </span>
                     </div>
-                    
+
                     <h3 className="text-xl font-semibold text-[#191919] mb-2">
                       {project.title}
                     </h3>
-                    
+
                     <p className="text-sm text-[#6b6b6b] mb-1">
                       Client: {project.client}
                     </p>
-                    
-                    <p className="text-[#6b6b6b] mb-4">
-                      {project.description}
-                    </p>
-                    
+
+                    <p className="text-[#6b6b6b] mb-4">{project.description}</p>
+
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.technologies.map((tech, idx) => (
                         <span
@@ -293,7 +328,7 @@ export default function PortfolioPage() {
                         </span>
                       ))}
                     </div>
-                    
+
                     <Link
                       href={`/portfolio/${project.id}`}
                       className="inline-flex items-center text-[#191919] font-medium hover:gap-3 transition-all duration-300"
@@ -332,7 +367,9 @@ export default function PortfolioPage() {
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl font-bold text-[#191919] mb-2">150+</div>
+                <div className="text-4xl font-bold text-[#191919] mb-2">
+                  150+
+                </div>
                 <div className="text-[#6b6b6b]">Projects Completed</div>
               </motion.div>
               <motion.div
@@ -342,7 +379,9 @@ export default function PortfolioPage() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl font-bold text-[#191919] mb-2">50+</div>
+                <div className="text-4xl font-bold text-[#191919] mb-2">
+                  50+
+                </div>
                 <div className="text-[#6b6b6b]">Happy Clients</div>
               </motion.div>
               <motion.div
@@ -352,7 +391,9 @@ export default function PortfolioPage() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl font-bold text-[#191919] mb-2">15+</div>
+                <div className="text-4xl font-bold text-[#191919] mb-2">
+                  15+
+                </div>
                 <div className="text-[#6b6b6b]">Industry Awards</div>
               </motion.div>
               <motion.div
@@ -362,7 +403,9 @@ export default function PortfolioPage() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl font-bold text-[#191919] mb-2">98%</div>
+                <div className="text-4xl font-bold text-[#191919] mb-2">
+                  98%
+                </div>
                 <div className="text-[#6b6b6b]">Client Satisfaction</div>
               </motion.div>
             </div>
@@ -384,7 +427,8 @@ export default function PortfolioPage() {
                   Have a Project in Mind?
                 </h2>
                 <p className="text-xl text-gray-300 mb-8">
-                  Let's collaborate to bring your vision to life with our expertise and innovation.
+                  Let&apos;s collaborate to bring your vision to life with our
+                  expertise and innovation.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link

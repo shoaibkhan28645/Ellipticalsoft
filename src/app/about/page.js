@@ -153,7 +153,7 @@ export default function AboutPage() {
                 </h1>
 
                 <p className="text-xl text-gray-600 mb-12 leading-relaxed max-w-3xl mx-auto">
-                  We're a team of passionate engineers, designers, and
+                  We are a team of passionate engineers, designers, and
                   strategists dedicated to creating software solutions that
                   transform businesses and improve lives.
                 </p>
@@ -359,9 +359,9 @@ export default function AboutPage() {
                 Technology Stack
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="text-[#BDBBBB]">Built with</span>{" "}
+                <span className="text-[#BDBBBB]">Built with</span>{" "}
                 <span className="text-[#191919]">modern tools</span>
-                </h2>
+              </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                 We use the latest technologies to ensure scalability,
                 performance, and maintainability
