@@ -116,7 +116,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/faq"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   FAQ&apos;s
@@ -133,7 +133,7 @@ export default function Footer() {
             <ul className="space-y-2 md:space-y-3">
               <li>
                 <Link
-                  href="#"
+                  href="/terms"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   Terms & Conditions
@@ -142,7 +142,7 @@ export default function Footer() {
 
               <li>
                 <Link
-                  href="#"
+                  href="/privacy"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   Privacy Policy

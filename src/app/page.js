@@ -19,7 +19,7 @@ export default function Home() {
         {/* Background - positioned within proper constraints */}
         <div className="absolute inset-0 z-0">
           <div className="max-w-7xl mx-auto flex justify-end h-full relative">
-            <Background className="absolute top-0 right-0 xl:right-8 2xl:right-16 h-full w-1/4 sm:w-1/3 lg:w-1/3 max-w-md" />
+            <Background className="absolute top-0 -right-4 sm:right-0 xl:right-8 2xl:right-16 h-full w-1/2 sm:w-1/3 lg:w-1/3 max-w-md opacity-60 sm:opacity-100" />
           </div>
         </div>
 

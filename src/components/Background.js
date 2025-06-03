@@ -5,19 +5,31 @@ import React, { useState, useEffect, useRef } from "react";
 const Background = ({ className = "", dark = false, showFog = false }) => {
   const [lines, setLines] = useState([]);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef(null);
   const lineRefs = useRef([]);
 
-  // Generate random lines with colors on mount
+  // Detect mobile and generate lines accordingly
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
     const colors = ["#BEF264", "#F7C7AD"]; // Lime and Peach/Salmon
-    const generatedLines = Array.from({ length: 5 }, (_, i) => ({
+    const lineCount = window.innerWidth < 640 ? 3 : 5; // Fewer lines on mobile
+    
+    const generatedLines = Array.from({ length: lineCount }, (_, i) => ({
       id: i,
       color: colors[Math.floor(Math.random() * colors.length)],
       delay: i * 2 + Math.random() * 2, // Staggered delays with randomness
       duration: 6 + Math.random() * 2, // Varied durations
     }));
     setLines(generatedLines);
+    
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   // Handle scroll for fog intensity adjustment
@@ -105,29 +117,29 @@ const Background = ({ className = "", dark = false, showFog = false }) => {
         </>
       )}
 
-      {/* Base lines with scroll reveal */}
-      {[1, 2, 3, 4, 5].map((num) => (
+      {/* Base lines with scroll reveal - responsive count */}
+      {lines.map((_, index) => (
         <div
-          key={`base-${num}`}
-          ref={(el) => (lineRefs.current[num - 1] = el)}
-          className={`absolute top-0 h-full w-0.5 bg-gray-200/50 base-line`}
+          key={`base-${index}`}
+          ref={(el) => (lineRefs.current[index] = el)}
+          className={`absolute top-0 h-full w-0.5 bg-gray-200/30 sm:bg-gray-200/50 base-line`}
           style={{
-            left: `${(num * 100) / 6}%`,
+            left: `${((index + 1) * 100) / (lines.length + 1)}%`,
             transition: "opacity 1.5s ease-out",
             opacity: 0,
           }}
         />
       ))}
 
-      {/* Flowing color segments */}
+      {/* Flowing color segments - smaller on mobile */}
       {lines.map((line, index) => (
         <div
           key={`flow-${line.id}`}
-          className={`absolute w-1 h-24 ${getGlowClass(
+          className={`absolute ${isMobile ? 'w-0.5 h-16' : 'w-1 h-24'} ${getGlowClass(
             line.color
           )} flowing-line`}
           style={{
-            left: `${((index + 1) * 100) / 6}%`,
+            left: `${((index + 1) * 100) / (lines.length + 1)}%`,
             backgroundColor: line.color,
             animationDelay: `${line.delay}s`,
             animationDuration: `${line.duration}s`,
@@ -180,6 +192,14 @@ const Background = ({ className = "", dark = false, showFog = false }) => {
           transform: scaleY(1) !important;
           transition: all 1.5s ease-out !important;
         }
+        
+        @media (max-width: 640px) {
+          .glow-lime,
+          .glow-peach {
+            box-shadow: 0 0 10px 2px rgba(190, 242, 100, 0.4),
+              0 0 20px 4px rgba(190, 242, 100, 0.1);
+          }
+        }
       `}</style>
     </div>
   );
@@ -225,7 +245,7 @@ export const FogOverlay = () => {
     <div className="fixed inset-0 pointer-events-none z-20">
       {/* Top fog overlay */}
       <div
-        className="absolute top-0 left-0 right-0 h-32"
+        className="absolute top-0 left-0 right-0 h-24 sm:h-32"
         style={{
           background: `linear-gradient(to bottom, 
             rgba(255, 255, 255, ${fogIntensity}) 0%, 
@@ -240,7 +260,7 @@ export const FogOverlay = () => {
 
       {/* Bottom fog overlay */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-32"
+        className="absolute bottom-0 left-0 right-0 h-24 sm:h-32"
         style={{
           background: `linear-gradient(to top, 
             rgba(255, 255, 255, ${fogIntensity}) 0%, 

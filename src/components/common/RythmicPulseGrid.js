@@ -4,14 +4,25 @@ import { useEffect, useRef } from "react";
 
 const RhythmicPulseGrid = () => {
   const canvasRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
 
     const ctx = canvas.getContext("2d");
-    canvas.width = 550;
-    canvas.height = 550;
+    
+    // Responsive sizing
+    const updateCanvasSize = () => {
+      const containerWidth = container.offsetWidth;
+      const size = Math.min(containerWidth, 550);
+      canvas.width = size;
+      canvas.height = size;
+    };
+    
+    updateCanvasSize();
+    window.addEventListener('resize', updateCanvasSize);
 
     let time = 0;
     let animationFrameId = null;
@@ -76,6 +87,8 @@ const RhythmicPulseGrid = () => {
 
     // Cleanup function
     return () => {
+      window.removeEventListener('resize', updateCanvasSize);
+      
       if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
         animationFrameId = null;
@@ -91,13 +104,13 @@ const RhythmicPulseGrid = () => {
 
   return (
     <div
+      ref={containerRef}
+      className="w-[350px] h-[350px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px]"
       style={{
-        width: "550px",
-        height: "550px",
         backgroundColor: "transparent",
       }}
     >
-      <canvas ref={canvasRef} />
+      <canvas ref={canvasRef} className="w-full h-full" />
     </div>
   );
 };
